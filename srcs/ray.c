@@ -6,7 +6,7 @@
 /*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 10:52:49 by jstudnic          #+#    #+#             */
-/*   Updated: 2024/06/12 12:51:05 by jstudnic         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:26:51 by jstudnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,3 @@ t_ray	create_ray(t_vector origin, t_vector direction)
 	ray.direction = direction;
 	return (ray);
 }
-
