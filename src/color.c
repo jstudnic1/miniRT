@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/minirt.h"
+#include "../incl/color.h"
 
 t_rgb	create_rgb(int r, int g, int b)
 {

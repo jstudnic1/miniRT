@@ -13,7 +13,6 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../mlx_linux/mlx.h"
 # include "color.h"
 # include "objects.h"
 # include "libft.h"
@@ -22,6 +21,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <pthread.h>
 
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f

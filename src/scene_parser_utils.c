@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/minirt.h"
+#include "../incl/minirt.h"
 
 void	init_scene(t_scene *scene)
 {

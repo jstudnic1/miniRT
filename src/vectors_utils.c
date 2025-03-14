@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/minirt.h"
+#include "../incl/minirt.h"
 
 double	vec_len(t_vector vector)
 {

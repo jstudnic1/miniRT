@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 10:52:49 by jstudnic          #+#    #+#             */
-/*   Updated: 2024/06/12 14:26:51 by jstudnic         ###   ########.fr       */
+/*   Created: 2025-03-14 17:14:29 by smelicha          #+#    #+#             */
+/*   Updated: 2025-03-14 17:14:29 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/minirt.h"
+#include "incl/minirt.h"
 
-t_ray	create_ray(t_vector origin, t_vector direction)
+int main()
 {
-	t_ray	ray;
-
-	ray.origin = origin;
-	ray.direction = direction;
-	return (ray);
+	return (0);
 }

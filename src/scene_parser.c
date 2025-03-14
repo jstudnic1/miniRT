@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/minirt.h"
-#include <math.h>
+#include "../incl/minirt.h"
 
 t_rgb	parse_color(char *str)
 {
