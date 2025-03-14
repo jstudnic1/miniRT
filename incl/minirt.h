@@ -16,6 +16,7 @@
 # include "color.h"
 # include "objects.h"
 # include "libft.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
