@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 16:30:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/03/14 16:02:53 by jstudnic         ###   ########.fr       */
+/*   Created: 2024/03/14 16:32:23 by jstudnic          #+#    #+#             */
+/*   Updated: 2025/03/14 16:18:32 by jstudnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "../lib/minirt.h"
 
-typedef struct s_rgb
+t_rgb	create_rgb(int r, int g, int b)
 {
-	int	r;
-	int	g;
-	int	b;
-}	t_rgb;
+	t_rgb	color;
 
-// Color utility functions
-t_rgb	create_rgb(int r, int g, int b);
-int		validate_rgb(t_rgb color);
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
+}
 
-#endif
+int	validate_rgb(t_rgb color)
+{
+	return (color.r >= 0 && color.r <= 255
+		&& color.g >= 0 && color.g <= 255
+		&& color.b >= 0 && color.b <= 255);
+} 

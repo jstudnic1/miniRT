@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 17:47:15 by jstudnic          #+#    #+#             */
-/*   Updated: 2024/06/12 14:24:08 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:27:41 by jstudnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../mlx/mlx.h"
+# include "../mlx_linux/mlx.h"
 # include "color.h"
 # include "objects.h"
+# include "libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -42,6 +43,14 @@ t_vector	vec_div(t_vector u, t_vector v);
 /* RAYS */
 t_ray		create_ray(t_vector origin, t_vector direction);
 
-/*INTERSECT PLANE*/
+/* SCENE PARSER */
+t_scene		*parse_scene(char *filename);
+void		init_scene(t_scene *scene);
+void		free_scene(t_scene *scene);
+int			add_light(t_scene *scene, t_light light);
+int			add_plane(t_scene *scene, t_plane plane);
+int			add_cylinder(t_scene *scene, t_cylinder cylinder);
+int			validate_scene(t_scene *scene);
+int			parse_objects(char *line, t_scene *scene);
 
 #endif
