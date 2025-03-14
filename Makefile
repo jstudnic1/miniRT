@@ -18,13 +18,15 @@ SRCS = 	main.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I../lib
-LDFLAGS = -lm
+CFLAGS = -Wall -Wextra -Werror
+MLX42 = ./MLX42/build/libmlx42.a
+MLX42_BUILD_DIR = ./MLX42/build
+CINCL = -Iinclude -ldl -lglfw -pthread -lm
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(CFLAGS) $(MLX42) $(CINCL) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -33,6 +35,16 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+mlx:
+	git submodule init MLX42
+	git submodule update MLX42
+	cd MLX42; cmake -B build; make -C build -j4
+
+mlx_clean:
+	rm -rf $(MLX42_BUILD_DIR)
+
+mlx_re: mlx_clean mlx
 
 test: all
 	./$(NAME)
