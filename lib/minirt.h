@@ -52,5 +52,7 @@ int			add_plane(t_scene *scene, t_plane plane);
 int			add_cylinder(t_scene *scene, t_cylinder cylinder);
 int			validate_scene(t_scene *scene);
 int			parse_objects(char *line, t_scene *scene);
+t_vector	parse_vector(char *str);
+t_rgb		parse_color(char *str);
 
 #endif

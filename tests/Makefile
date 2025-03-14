@@ -12,6 +12,7 @@ SRCS = test_parser.c \
        ../srcs/ft_split.c \
        ../srcs/ft_atoi_atof.c \
        ../srcs/ft_calloc.c \
+	   ../srcs/intersect_plane.c \
        ../srcs/get_next_line.c
 
 OBJS = $(SRCS:.c=.o)

@@ -13,7 +13,7 @@
 #include "../lib/minirt.h"
 #include <math.h>
 
-static t_rgb	parse_color(char *str)
+t_rgb	parse_color(char *str)
 {
 	t_rgb	color;
 	char	**values;
@@ -34,7 +34,7 @@ static t_rgb	parse_color(char *str)
 	return (color);
 }
 
-static t_vector	parse_vector(char *str)
+t_vector	parse_vector(char *str)
 {
 	t_vector	vec;
 	char		**values;
