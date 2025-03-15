@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/minirt.h"
+#include "../../incl/minirt.h"
 
 double	normalize_vec(t_vector *vector)
 {

@@ -1,19 +1,19 @@
 NAME = minirt
 
 SRCS = 	main.c \
-		src/scene_parser.c \
-       	src/scene_parser_utils.c \
-       	src/scene_parser_objects.c \
-       	src/vectors.c \
-       	src/vectors_utils.c \
-       	src/ray.c \
-       	src/ray_utils.c \
-       	src/color.c \
-       	src/ft_split.c \
-       	src/ft_atoi_atof.c \
-       	src/ft_calloc.c \
-	   	src/intersect_plane.c \
-       	src/get_next_line.c
+		src/parser/scene_parser.c \
+       	src/parser/scene_parser_utils.c \
+       	src/parser/scene_parser_objects.c \
+       	src/render/vectors.c \
+       	src/render/vectors_utils.c \
+       	src/render/ray.c \
+       	src/render/ray_utils.c \
+       	src/render/color.c \
+       	src/utils/ft_split.c \
+       	src/utils/ft_atoi_atof.c \
+       	src/utils/ft_calloc.c \
+	   	src/render/intersect_plane.c \
+       	src/utils/get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 

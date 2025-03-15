@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/minirt.h"
+#include "../../incl/minirt.h"
 
 t_rgb	parse_color(char *str)
 {
@@ -18,14 +18,14 @@ t_rgb	parse_color(char *str)
 	char	**values;
 
 	values = ft_split(str, ',');
-	if (!values || !values[0] || !values[1] || !values[2])
+	if (double_array_length(values) !=2)
 	{
 		if (values)
 			ft_free_split(values);
 		return ((t_rgb){-1, -1, -1});
 	}
-	color = create_rgb(ft_atoi(values[0]), 
-		ft_atoi(values[1]), 
+	color = create_rgb(ft_atoi(values[0]), \
+		ft_atoi(values[1]), \
 		ft_atoi(values[2]));
 	ft_free_split(values);
 	if (!validate_rgb(color))
@@ -39,7 +39,7 @@ t_vector	parse_vector(char *str)
 	char		**values;
 
 	values = ft_split(str, ',');
-	if (!values || !values[0] || !values[1] || !values[2])
+	if (double_array_length(values) != 2)
 	{
 		if (values)
 			ft_free_split(values);
@@ -57,7 +57,7 @@ static int	parse_ambient(char *line, t_scene *scene)
 	char	**tokens;
 
 	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[1] || !tokens[2])
+	if (double_array_length(tokens) != 3)
 	{
 		if (tokens)
 			ft_free_split(tokens);
@@ -76,7 +76,7 @@ static int	parse_camera(char *line, t_scene *scene)
 	char	**tokens;
 
 	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[1] || !tokens[2] || !tokens[3])
+	if (double_array_length(tokens) != 3)
 	{
 		if (tokens)
 			ft_free_split(tokens);
@@ -97,7 +97,7 @@ static int	parse_light(char *line, t_scene *scene)
 	t_light	light;
 
 	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[1] || !tokens[2] || !tokens[3])
+	if (double_array_length(tokens) != 3)
 	{
 		if (tokens)
 			ft_free_split(tokens);
@@ -118,7 +118,7 @@ static int	parse_plane(char *line, t_scene *scene)
 	t_plane	plane;
 
 	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[1] || !tokens[2] || !tokens[3])
+	if (double_array_length(tokens) != 3)
 	{
 		if (tokens)
 			ft_free_split(tokens);
@@ -139,12 +139,18 @@ static int	parse_cylinder(char *line, t_scene *scene)
 	t_cylinder	cylinder;
 
 	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[1] || !tokens[2] || !tokens[3] || !tokens[4] || !tokens[5])
+	if (double_array_length(tokens) != 5)
 	{
 		if (tokens)
 			ft_free_split(tokens);
 		return (0);
 	}
+	// if (!tokens || !tokens[1] || !tokens[2] || !tokens[3] || !tokens[4] || !tokens[5])
+	// {
+	// 	if (tokens)
+	// 		ft_free_split(tokens);
+	// 	return (0);
+	// }
 	cylinder.center = parse_vector(tokens[1]);
 	cylinder.axis = parse_vector(tokens[2]);
 	cylinder.diameter = ft_atof(tokens[3]);

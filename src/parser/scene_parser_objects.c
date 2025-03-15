@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/minirt.h"
+#include "../../incl/minirt.h"
 
 static int	parse_light(char *line, t_scene *scene)
 {

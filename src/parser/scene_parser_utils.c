@@ -10,7 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/minirt.h"
+#include "../../incl/minirt.h"
+
+int	double_array_length(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return (0);
+	while (array[i++])
+		;
+	return (i);
+}
 
 void	init_scene(t_scene *scene)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/minirt.h"
+#include "../../incl/minirt.h"
 
 t_ray	create_ray(t_vector origin, t_vector direction)
 {

@@ -27,6 +27,12 @@
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f
 
+typedef struct s_data
+{
+	mlx_t	*mlx;
+	t_scene	*scene;
+}	t_data;
+
 /* VECTOR UTILS*/
 double		vec_len(t_vector vector);
 double		dot_product(t_vector u, t_vector v);
@@ -55,5 +61,6 @@ int			validate_scene(t_scene *scene);
 int			parse_objects(char *line, t_scene *scene);
 t_vector	parse_vector(char *str);
 t_rgb		parse_color(char *str);
+int			double_array_length(char **array);
 
 #endif
