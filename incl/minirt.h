@@ -73,6 +73,6 @@ int			double_array_length(char **array);
 
 /* WINDOW */
 int		window_init(t_data *data);
-void	key_handler(void *param);
+void	key_handler(mlx_key_data_t key, void *param);
 
 #endif

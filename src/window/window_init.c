@@ -28,15 +28,16 @@ void	test_image_fill(t_window *window)
 		while (x < window->width)
 		{
 			mlx_put_pixel(window->image, x, y, color++);
-			if (color == UINT32_MAX)
+			color += 1000;
+			if (color > (UINT32_MAX - 2000))
 				color = 0;
 			printf("x: %i, x_max: %i, y: %i, y_max %i, color %u\n", x, window->width, y, window->height, color);
 			x++;
 		}
-		mlx_image_to_window(window->mlx, window->image, 0, 0);
 		x = 0;
 		y++;
 	}
+	mlx_image_to_window(window->mlx, window->image, 0, 0);
 }
 
 void	resize_handler(int new_x, int new_y, void *param)
@@ -56,7 +57,7 @@ void	resize_handler(int new_x, int new_y, void *param)
 int	window_init(t_data *data)
 {
 	data->window.mlx = mlx_init(data->window.width, data->window.height, "miniRT", 1);
-	mlx_loop_hook(data->window.mlx, key_handler, &data);
+	mlx_key_hook(data->window.mlx, key_handler, data);
 	mlx_resize_hook(data->window.mlx, resize_handler, &data->window);
 	data->window.image = mlx_new_image(data->window.mlx, data->window.width, data->window.height);
 	mlx_image_to_window(data->window.mlx, data->window.image, 0, 0);
