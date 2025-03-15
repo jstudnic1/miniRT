@@ -14,23 +14,6 @@
 #include "incl/minirt.h"
 #include <stdint.h>
 
-void	key_handler(void *param)
-{
-	t_data	*data;
-
-	data = param;
-	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(data->mlx);
-}
-
-int	window_init(t_data *data)
-{
-	data->mlx = mlx_init(640, 480, "Test", 1);
-	mlx_loop_hook(data->mlx, key_handler, &data);
-	mlx_loop(data->mlx);
-	return (0);
-}
-
 int	scene_init(t_data *data, char **argv)
 {
 	printf("");
@@ -42,7 +25,10 @@ int	scene_init(t_data *data, char **argv)
 
 void	data_init(t_data *data)
 {
-	data->mlx = NULL;
+	data->window.mlx = NULL;
+	data->window.image = NULL;
+	data->window.width = 6;
+	data->window.height = 4;
 	data->scene = NULL;
 }
 

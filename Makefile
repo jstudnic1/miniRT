@@ -13,12 +13,14 @@ SRCS = 	main.c \
        	src/utils/ft_atoi_atof.c \
        	src/utils/ft_calloc.c \
 	   	src/render/intersect_plane.c \
-       	src/utils/get_next_line.c
+       	src/utils/get_next_line.c \
+		src/window/window_init.c \
+		src/window/event_handlers.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 MLX42 = ./MLX42/build/libmlx42.a
 MLX42_BUILD_DIR = ./MLX42/build
 CINCL = -Iinclude -ldl -lglfw -pthread -lm

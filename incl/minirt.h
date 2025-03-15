@@ -27,10 +27,18 @@
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f
 
+typedef struct s_window
+{
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	uint32_t	width;
+	uint32_t	height;
+}	t_window;
+
 typedef struct s_data
 {
-	mlx_t	*mlx;
-	t_scene	*scene;
+	t_window	window;
+	t_scene		*scene;
 }	t_data;
 
 /* VECTOR UTILS*/
@@ -62,5 +70,9 @@ int			parse_objects(char *line, t_scene *scene);
 t_vector	parse_vector(char *str);
 t_rgb		parse_color(char *str);
 int			double_array_length(char **array);
+
+/* WINDOW */
+int		window_init(t_data *data);
+void	key_handler(void *param);
 
 #endif
