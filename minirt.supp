@@ -1,0 +1,286 @@
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:malloc
+   fun:_dl_find_object_update
+   fun:dl_open_worker_begin
+   fun:_dl_catch_exception
+   fun:dl_open_worker
+   fun:_dl_catch_exception
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_exception
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen_implementation
+   fun:dlopen@@GLIBC_2.34
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0
+   fun:glfwCreateWindow
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   fun:glfwCreateWindow
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   fun:mlx_init
+   fun:window_init
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   fun:glfwCreateWindow
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:strdup
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX.so.0.0.0
+   fun:glfwCreateWindow
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   fun:mlx_loop
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:strdup
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   fun:mlx_init
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/iris_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+}

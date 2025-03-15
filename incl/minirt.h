@@ -17,6 +17,7 @@
 # include "objects.h"
 # include "libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
+#include <bits/pthreadtypes.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -26,7 +27,27 @@
 
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f
+# define N_THREADS 12
 
+/**
+ * @brief 
+ * 
+ */
+typedef struct s_core
+{
+	pthread_t		tid;
+	pthread_mutex_t	*print;
+	int				id;
+	int				x_start;
+	int				y_start;
+	int				x_end;
+	int				y_end;
+}	t_core;
+
+/**
+ * @brief 
+ * 
+ */
 typedef struct s_window
 {
 	mlx_t		*mlx;
@@ -35,10 +56,16 @@ typedef struct s_window
 	uint32_t	height;
 }	t_window;
 
+/**
+ * @brief 
+ * 
+ */
 typedef struct s_data
 {
-	t_window	window;
-	t_scene		*scene;
+	t_window		window;
+	t_scene			*scene;
+	t_core			cores[N_THREADS];
+	pthread_mutex_t	print;
 }	t_data;
 
 /* VECTOR UTILS*/
@@ -72,7 +99,7 @@ t_rgb		parse_color(char *str);
 int			double_array_length(char **array);
 
 /* WINDOW */
-int		window_init(t_data *data);
+int		window_init(t_window *window);
 void	key_handler(mlx_key_data_t key, void *param);
 
 #endif

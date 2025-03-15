@@ -22,16 +22,16 @@ void	test_image_fill(t_window *window)
 
 	x = 0;
 	y = 0;
-	color = 0;
+	color = 2;
 	while (y < window->height)
 	{
 		while (x < window->width)
 		{
-			mlx_put_pixel(window->image, x, y, color++);
-			color += 1000;
+			mlx_put_pixel(window->image, x, y, color);
+			color += 10000;
 			if (color > (UINT32_MAX - 2000))
-				color = 0;
-			printf("x: %i, x_max: %i, y: %i, y_max %i, color %u\n", x, window->width, y, window->height, color);
+				color = 2;
+			// printf("x: %i, x_max: %i, y: %i, y_max %i, color %u\n", x, window->width, y, window->height, color);
 			x++;
 		}
 		x = 0;
@@ -40,6 +40,13 @@ void	test_image_fill(t_window *window)
 	mlx_image_to_window(window->mlx, window->image, 0, 0);
 }
 
+/**
+ * @brief Updates the image based on the new window resolution
+ * 
+ * @param new_x - new width
+ * @param new_y - new height
+ * @param param - pointer to window struct
+ */
 void	resize_handler(int new_x, int new_y, void *param)
 {
 	t_window	*window;
@@ -50,20 +57,27 @@ void	resize_handler(int new_x, int new_y, void *param)
 	window->width = new_x;
 	window->height = new_y;
 	mlx_delete_image(window->mlx, window->image);
+	window->image = NULL;
 	window->image = mlx_new_image(window->mlx, new_x, new_y);
 	test_image_fill(window);
 }
 
-int	window_init(t_data *data)
+/**
+ * @brief Creates window and image of size defined by width and height
+ * 
+ * @param window - data struct with data about window
+ * @return int 0 - success, -1 - fail
+ */
+int	window_init(t_window *window)
 {
-	data->window.mlx = mlx_init(data->window.width, data->window.height, "miniRT", 1);
-	mlx_key_hook(data->window.mlx, key_handler, data);
-	mlx_resize_hook(data->window.mlx, resize_handler, &data->window);
-	data->window.image = mlx_new_image(data->window.mlx, data->window.width, data->window.height);
-	mlx_image_to_window(data->window.mlx, data->window.image, 0, 0);
-	test_image_fill(&data->window);
+	window->mlx = mlx_init(window->width, window->height, "miniRT", 1);
+	mlx_key_hook(window->mlx, key_handler, window);
+	mlx_resize_hook(window->mlx, resize_handler, window);
+	window->image = mlx_new_image(window->mlx, window->width, window->height);
+	mlx_image_to_window(window->mlx, window->image, 0, 0);
+	test_image_fill(window);
 	printf("before mlx loop\n");
-	mlx_loop(data->window.mlx);
+	mlx_loop(window->mlx);
 	printf("after mlx loop\n");
 	return (0);
 }

@@ -27,8 +27,8 @@ void	data_init(t_data *data)
 {
 	data->window.mlx = NULL;
 	data->window.image = NULL;
-	data->window.width = 6;
-	data->window.height = 4;
+	data->window.width = 640;
+	data->window.height = 480;
 	data->scene = NULL;
 }
 
@@ -40,6 +40,8 @@ int main(int argc, char **argv)
 		return (0);
 	data_init(&data);
 	scene_init(&data, argv);
-	window_init(&data);
+	window_init(&data.window);
+	if (data.window.image)
+		mlx_delete_image(data.window.mlx, data.window.image);
 	return (0);
 }
