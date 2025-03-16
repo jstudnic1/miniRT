@@ -29,6 +29,13 @@
 # define RAY_T_MAX 1.0e30f
 # define N_THREADS 12
 
+typedef enum e_core_state
+{
+	run,
+	stop,
+	finish
+}	t_e_core_state;
+
 /**
  * @brief 
  * 
@@ -37,6 +44,8 @@ typedef struct s_core
 {
 	pthread_t		tid;
 	pthread_mutex_t	*print;
+	pthread_mutex_t	state_mtx;
+	t_e_core_state	state;
 	int				id;
 	int				x_start;
 	int				y_start;
@@ -104,5 +113,6 @@ void	key_handler(mlx_key_data_t key, void *param);
 
 /* THREADS */
 int		deploy_threads(t_data *data);
+void	change_cores_state(t_data *data, t_e_core_state new_state);
 
 #endif

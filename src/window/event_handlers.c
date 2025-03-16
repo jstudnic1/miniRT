@@ -26,4 +26,19 @@ void	key_handler(mlx_key_data_t key, void *param)
 		mlx_close_window(data->window.mlx);
 		data->window.mlx = NULL;
 	}
+	else if (key.key == MLX_KEY_R)
+	{
+		printf("telling cores to run\n");
+		change_cores_state(data, run);
+	}
+	else if (key.key == MLX_KEY_S)
+	{
+		printf("telling cores to stop\n");
+		change_cores_state(data, stop);
+	}
+	else if (key.key == MLX_KEY_F)
+	{
+		printf("telling cores to finish\n");
+		change_cores_state(data, finish);
+	}
 }
