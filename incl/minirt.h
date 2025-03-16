@@ -102,4 +102,7 @@ int			double_array_length(char **array);
 int		window_init(t_window *window);
 void	key_handler(mlx_key_data_t key, void *param);
 
+/* THREADS */
+int		deploy_threads(t_data *data);
+
 #endif

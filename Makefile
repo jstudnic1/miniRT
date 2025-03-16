@@ -15,7 +15,8 @@ SRCS = 	main.c \
 	   	src/render/intersect_plane.c \
        	src/utils/get_next_line.c \
 		src/window/window_init.c \
-		src/window/event_handlers.c
+		src/window/event_handlers.c \
+		src/threads/deploy_threads.c
 
 OBJS = $(SRCS:.c=.o)
 

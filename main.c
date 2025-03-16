@@ -40,6 +40,7 @@ int main(int argc, char **argv)
 		return (0);
 	data_init(&data);
 	scene_init(&data, argv);
+	deploy_threads(&data);
 	window_init(&data.window);
 	if (data.window.image)
 		mlx_delete_image(data.window.mlx, data.window.image);
