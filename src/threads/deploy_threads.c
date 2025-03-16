@@ -14,7 +14,12 @@
 #include <pthread.h>
 #include <unistd.h>
 
-
+/**
+ * @brief Creates state mutexes and debug print mutex
+ * 
+ * @param data 
+ * @return int 
+ */
 int	create_mutexes(t_data *data)
 {
 	int	i;
@@ -29,6 +34,14 @@ int	create_mutexes(t_data *data)
 	return (0);
 }
 
+/**
+ * @brief Dummy function that will be used as a template for the computation
+ function
+ TODO add internal state variable so the state mutex isn't locked during entire loop cycle
+ * 
+ * @param core 
+ * @return void* 
+ */
 void	*dummy_function(t_core *core)
 {
 	while (true)
@@ -51,6 +64,14 @@ void	*dummy_function(t_core *core)
 	return (NULL);
 }
 
+/**
+ * @brief Initializes data for the particular threads,
+ starting and ending pixel coordinates computed by the number of
+ threads
+ TODO compute different intervals for different threads
+ * 
+ * @param data - main data struct
+ */
 void	init_cores_data(t_data *data)
 {
 	int	i;
@@ -70,6 +91,12 @@ void	init_cores_data(t_data *data)
 	}
 }
 
+/**
+ * @brief Changes the state of all running threads
+ * 
+ * @param data - main data struct
+ * @param new_state - new state of the threads
+ */
 void	change_cores_state(t_data *data, t_e_core_state new_state)
 {
 	int	i;
@@ -84,7 +111,13 @@ void	change_cores_state(t_data *data, t_e_core_state new_state)
 	}
 }
 
-
+/**
+ * @brief Creates thread specific mutexes, inits thread data structure
+ and creates the threads themselves
+ * 
+ * @param data - main data struct
+ * @return int - 0 OK, -1 - NOK
+ */
 int	deploy_threads(t_data *data)
 {
 	int	i;

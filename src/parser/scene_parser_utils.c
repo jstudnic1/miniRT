@@ -19,8 +19,8 @@ int	double_array_length(char **array)
 	i = 0;
 	if (!array)
 		return (0);
-	while (array[i++])
-		;
+	while (array[i])
+		i++;
 	return (i);
 }
 

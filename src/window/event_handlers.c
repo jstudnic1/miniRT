@@ -12,6 +12,12 @@
 
 #include "../../incl/minirt.h"
 
+/**
+ * @brief Handles key presses...
+ * 
+ * @param key 
+ * @param param 
+ */
 void	key_handler(mlx_key_data_t key, void *param)
 {
 	t_data	*data;

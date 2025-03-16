@@ -14,6 +14,14 @@
 #include "incl/minirt.h"
 #include <stdint.h>
 
+/**
+ * @brief Calls parser and validates input file
+ TODO test the working state of the parser
+ * 
+ * @param data main data struct
+ * @param argv command line argument
+ * @return int 0 - OK, -1 - NOK
+ */
 int	scene_init(t_data *data, char **argv)
 {
 	printf("");
@@ -32,6 +40,14 @@ void	data_init(t_data *data)
 	data->scene = NULL;
 }
 
+/**
+ * @brief 
+ TODO check for returns of the functions like scene init which should validate the input file, perhaps make an "development check exception"
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char **argv)
 {
 	t_data	data;

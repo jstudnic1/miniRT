@@ -14,6 +14,11 @@
 #include <stdint.h>
 #include <stdint.h>
 
+/**
+ * @brief Dummy function, just to put some distinctive pixels to the image
+ * 
+ * @param window 
+ */
 void	test_image_fill(t_window *window)
 {
 	uint32_t	x;
