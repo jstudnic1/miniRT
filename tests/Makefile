@@ -1,18 +1,19 @@
 NAME = test_parser
 
 SRCS = test_parser.c \
-       ../srcs/scene_parser.c \
-       ../srcs/scene_parser_utils.c \
-       ../srcs/scene_parser_objects.c \
-       ../srcs/vectors.c \
-       ../srcs/vectors_utils.c \
-       ../srcs/ray.c \
-       ../srcs/ray_utils.c \
-       ../srcs/color.c \
-       ../srcs/ft_split.c \
-       ../srcs/ft_atoi_atof.c \
-       ../srcs/ft_calloc.c \
-       ../srcs/get_next_line.c
+       ../src/scene_parser.c \
+       ../src/scene_parser_utils.c \
+       ../src/scene_parser_objects.c \
+       ../src/vectors.c \
+       ../src/vectors_utils.c \
+       ../src/ray.c \
+       ../src/ray_utils.c \
+       ../src/color.c \
+       ../src/ft_split.c \
+       ../src/ft_atoi_atof.c \
+       ../src/ft_calloc.c \
+	   ../src/intersect_plane.c \
+       ../src/get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 
