@@ -24,7 +24,6 @@
  */
 int	scene_init(t_data *data, char **argv)
 {
-	printf("");
 	if (double_array_length(argv) != 1)
 		return (-1);
 	data->scene = parse_scene(argv[1]);
@@ -38,6 +37,8 @@ void	data_init(t_data *data)
 	data->window.width = 640;
 	data->window.height = 480;
 	data->scene = NULL;
+	data->window.exit = false;
+	data->window.data = data;
 }
 
 /**

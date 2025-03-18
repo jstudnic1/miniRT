@@ -24,10 +24,13 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f
 # define N_THREADS 12
+
+typedef struct s_data t_data;
 
 typedef enum e_core_state
 {
@@ -59,10 +62,12 @@ typedef struct s_core
  */
 typedef struct s_window
 {
+	t_data		*data;
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	uint32_t	width;
 	uint32_t	height;
+	bool		exit;
 }	t_window;
 
 /**
@@ -114,5 +119,8 @@ void	key_handler(mlx_key_data_t key, void *param);
 /* THREADS */
 int		deploy_threads(t_data *data);
 void	change_cores_state(t_data *data, t_e_core_state new_state);
+
+/* UTILS */
+uint64_t	ft_get_time(void);
 
 #endif

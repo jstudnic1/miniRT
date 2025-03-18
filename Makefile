@@ -1,22 +1,23 @@
 NAME = minirt
 
 SRCS = 	main.c \
-		src/parser/scene_parser.c \
-       	src/parser/scene_parser_utils.c \
-       	src/parser/scene_parser_objects.c \
-       	src/render/vectors.c \
-       	src/render/vectors_utils.c \
-       	src/render/ray.c \
-       	src/render/ray_utils.c \
-       	src/render/color.c \
-       	src/utils/ft_split.c \
-       	src/utils/ft_atoi_atof.c \
-       	src/utils/ft_calloc.c \
-	   	src/render/intersect_plane.c \
-       	src/utils/get_next_line.c \
-		src/window/window_init.c \
-		src/window/event_handlers.c \
-		src/threads/deploy_threads.c
+	src/parser/scene_parser.c \
+	src/parser/scene_parser_utils.c \
+	src/parser/scene_parser_objects.c \
+	src/render/vectors.c \
+	src/render/vectors_utils.c \
+	src/render/ray.c \
+	src/render/ray_utils.c \
+	src/render/color.c \
+	src/utils/ft_split.c \
+	src/utils/ft_atoi_atof.c \
+	src/utils/ft_calloc.c \
+	src/render/intersect_plane.c \
+	src/utils/get_next_line.c \
+	src/window/window_init.c \
+	src/window/event_handlers.c \
+	src/threads/deploy_threads.c \
+	src/utils/time.c
 
 OBJS = $(SRCS:.c=.o)
 

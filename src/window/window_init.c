@@ -67,6 +67,41 @@ void	resize_handler(int new_x, int new_y, void *param)
 	test_image_fill(window);
 }
 
+void	exit_routine(t_window *window)
+{
+	mlx_delete_image(window->mlx, window->image);
+	window->image = NULL;
+	mlx_close_window(window->mlx);
+	window->mlx = NULL;
+	return ;
+}
+
+void	refresh_routine(t_window *window)
+{
+	mlx_image_to_window(window->mlx, window->image, 0, 0);
+}
+
+void	loop(void *param)
+{
+	t_window	*window;
+	uint64_t	current_ts;
+	static uint64_t	refresh_ts;
+
+	window = param;
+	current_ts = ft_get_time();
+	if (refresh_ts == 0)
+	{
+		refresh_ts = current_ts + 100;
+		return ;
+	}
+	if (current_ts > refresh_ts)
+		refresh_routine(window);
+	if (window->exit)
+		exit_routine(window);
+
+	usleep(20000);
+}
+
 /**
  * @brief Creates window and image of size defined by width and height
  * 
@@ -78,6 +113,7 @@ int	window_init(t_window *window)
 	window->mlx = mlx_init(window->width, window->height, "miniRT", 1);
 	mlx_key_hook(window->mlx, key_handler, window);
 	mlx_resize_hook(window->mlx, resize_handler, window);
+	mlx_loop_hook(window->mlx, loop, window);
 	window->image = mlx_new_image(window->mlx, window->width, window->height);
 	mlx_image_to_window(window->mlx, window->image, 0, 0);
 	test_image_fill(window);
