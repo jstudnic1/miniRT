@@ -123,4 +123,7 @@ void	change_cores_state(t_data *data, t_e_core_state new_state);
 /* UTILS */
 uint64_t	ft_get_time(void);
 
+/* DEBUG */
+void	print_scene(t_scene *scene);
+
 #endif

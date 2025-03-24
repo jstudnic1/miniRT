@@ -169,6 +169,7 @@ t_scene	*parse_scene(char *filename)
 	char	*line;
 	int		success;
 
+	printf("scene file path: %s\n", filename);
 	if (!filename)
 		return (NULL);
 	scene = ft_calloc(1, sizeof(t_scene));

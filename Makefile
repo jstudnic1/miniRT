@@ -17,7 +17,8 @@ SRCS = 	main.c \
 	src/window/window_init.c \
 	src/window/event_handlers.c \
 	src/threads/deploy_threads.c \
-	src/utils/time.c
+	src/utils/time.c \
+	src/parser/scene_print.c
 
 OBJS = $(SRCS:.c=.o)
 
