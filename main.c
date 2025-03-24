@@ -28,7 +28,7 @@ int	scene_init(t_data *data, char **argv)
 		return (-1);
 	data->scene = parse_scene(argv[1]);
 	printf("scene poiner: %p\n", data->scene);
-	// print_scene(data->scene);
+	print_scene(data->scene);
 	return (0);
 }
 

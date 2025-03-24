@@ -125,5 +125,6 @@ uint64_t	ft_get_time(void);
 
 /* DEBUG */
 void	print_scene(t_scene *scene);
+void	print_vector(const char *vec_name, t_vector *vector);
 
 #endif
