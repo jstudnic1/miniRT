@@ -20,31 +20,28 @@
  */
 void	key_handler(mlx_key_data_t key, void *param)
 {
-	t_data	*data;
+	t_window	*window;
 
-	data = param;
+	window = param;
 	printf("Key handler called\n");
 	if (key.key == MLX_KEY_ESCAPE)
 	{
 		printf("esc pressed\n");
-		mlx_delete_image(data->window.mlx, data->window.image);
-		data->window.image = NULL;
-		mlx_close_window(data->window.mlx);
-		data->window.mlx = NULL;
+		window->exit = true;
 	}
 	else if (key.key == MLX_KEY_R)
 	{
 		printf("telling cores to run\n");
-		change_cores_state(data, run);
+		change_cores_state(window->data, run);
 	}
 	else if (key.key == MLX_KEY_S)
 	{
 		printf("telling cores to stop\n");
-		change_cores_state(data, stop);
+		change_cores_state(window->data, stop);
 	}
 	else if (key.key == MLX_KEY_F)
 	{
 		printf("telling cores to finish\n");
-		change_cores_state(data, finish);
+		change_cores_state(window->data, finish);
 	}
 }

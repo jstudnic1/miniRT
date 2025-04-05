@@ -1,2 +1,4 @@
 *.o
 minirt
+*.kdev4
+.kdev4/
