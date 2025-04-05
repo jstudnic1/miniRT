@@ -94,6 +94,8 @@ void	loop(void *param)
 		refresh_ts = current_ts + 100;
 		return ;
 	}
+	// if (window->data->rendering)
+	// 	render(window->data);
 	if (current_ts > refresh_ts)
 		refresh_routine(window);
 	if (window->exit)

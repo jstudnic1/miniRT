@@ -13,22 +13,6 @@
 #include "../../incl/minirt.h"
 
 /**
- * @brief Takes scene and its objects, casts rays and puts pixel values
- to the mlx image, checks if the resolution changed and recomputes the image
- if true
- * 
- * @param data 
- * @return int 
- */
-int	render(t_data *data)
-{
-	static int	x;
-	static int	y;
-
-	return (0);
-}
-
-/**
  * @brief Creates ray from camera through the pixel in a view plane,
  checks if it hits object and returns value of the pixel
  * 
@@ -37,9 +21,26 @@ int	render(t_data *data)
  * @param scene 
  * @return t_rgb 
  */
-t_rgb	get_pixel_val(int x, int y, t_scene scene)
-{
-	t_rgb	pixel_value;
-	//TODO
-	return (pixel_value);
-}
+// static t_rgb	get_pixel_val(int x, int y, t_scene scene)
+// {
+// 	t_rgb	pixel_value;
+// 	//TODO
+// 	return (pixel_value);
+// }
+
+
+/**
+ * @brief Takes scene and its objects, casts rays and puts pixel values
+ to the mlx image, checks if the resolution changed and recomputes the image
+ if true
+ * 
+ * @param data 
+ * @return int 
+ */
+// int	render(t_data *data)
+// {
+// 	static int	x;
+// 	static int	y;
+
+// 	return (0);
+// }

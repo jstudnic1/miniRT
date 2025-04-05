@@ -29,11 +29,13 @@ int	scene_init(t_data *data, char **argv)
 	data->scene = parse_scene(argv[1]);
 	printf("scene poiner: %p\n", data->scene);
 	print_scene(data->scene);
+	data->rendering = true;
 	return (0);
 }
 
 void	data_init(t_data *data)
 {
+	data->rendering = false;
 	data->window.mlx = NULL;
 	data->window.image = NULL;
 	data->window.width = 640;
@@ -59,7 +61,7 @@ int main(int argc, char **argv)
 		return (0);
 	data_init(&data);
 	scene_init(&data, argv);
-	deploy_threads(&data);
+	// deploy_threads(&data);
 	window_init(&data.window);
 	if (data.window.image)
 		mlx_delete_image(data.window.mlx, data.window.image);
