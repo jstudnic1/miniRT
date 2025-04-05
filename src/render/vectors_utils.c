@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
+#include <math.h>
+
+// double	angle_between_rays(t_ray ray1, t_ray ray2)
+// {
+// 	//TODO
+// }
 
 double	vec_len(t_vector vector)
 {
