@@ -121,6 +121,7 @@ static int	parse_light(char *line, t_scene *scene)
 	{
 		if (tokens)
 			ft_free_split(tokens);
+		printf("parse light returning because of wrong number of tokens\n");
 		return (0);
 	}
 	light.position = parse_vector(tokens[1]);
@@ -128,7 +129,10 @@ static int	parse_light(char *line, t_scene *scene)
 	light.color = parse_color(tokens[3]);
 	ft_free_split(tokens);
 	if (isnan(light.position.x) || light.color.r == -1)
+	{
+		printf("parse light returning because of invalid color or position\n");
 		return (0);
+	}
 	return (add_light(scene, light));
 }
 
