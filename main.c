@@ -24,10 +24,11 @@
  */
 int	scene_init(t_data *data, char **argv)
 {
-	printf("");
-	if (double_array_length(argv) != 1)
+	if (double_array_length(argv) != 2)
 		return (-1);
 	data->scene = parse_scene(argv[1]);
+	printf("scene poiner: %p\n", data->scene);
+	print_scene(data->scene);
 	return (0);
 }
 
@@ -38,6 +39,8 @@ void	data_init(t_data *data)
 	data->window.width = 640;
 	data->window.height = 480;
 	data->scene = NULL;
+	data->window.exit = false;
+	data->window.data = data;
 }
 
 /**
@@ -52,7 +55,7 @@ int main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc != 1)
+	if (argc != 2)
 		return (0);
 	data_init(&data);
 	scene_init(&data, argv);
