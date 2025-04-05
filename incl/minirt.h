@@ -85,6 +85,7 @@ typedef struct s_data
 {
 	t_window		window;
 	t_scene			*scene;
+	bool			rendering;
 	t_core			cores[N_THREADS];
 	pthread_mutex_t	print;
 }	t_data;
@@ -105,6 +106,9 @@ t_vector	vec_div(t_vector u, t_vector v);
 
 /* RAYS */
 t_ray		create_ray(t_vector origin, t_vector direction);
+
+/* RENDERING */
+// int			render(t_data *data);
 
 /* SCENE PARSER */
 t_scene		*parse_scene(char *filename);
