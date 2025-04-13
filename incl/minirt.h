@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 17:47:15 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/03/14 16:27:41 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:02:06 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_vector	vec_div(t_vector u, t_vector v);
 t_ray		create_ray(t_vector origin, t_vector direction);
 
 /* RENDERING */
-// int			render(t_data *data);
+int			render(t_data *data);
 
 /* SCENE PARSER */
 t_scene		*parse_scene(char *filename);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-05 13:30:08 by smelicha          #+#    #+#             */
-/*   Updated: 2025-04-05 13:30:08 by smelicha         ###   ########.fr       */
+/*   Created: 2025/04/05 13:30:08 by smelicha          #+#    #+#             */
+/*   Updated: 2025/04/13 13:10:25 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,23 @@
  * @param data 
  * @return int 
  */
-// int	render(t_data *data)
-// {
-// 	static int	x;
-// 	static int	y;
+int	render(t_data *data)
+{
+	static uint32_t	x;
+	static uint32_t	y;
+	uint32_t		color = 125843;
 
-// 	return (0);
-// }
+
+	mlx_put_pixel(data->window.image, x, y, color);
+	if (x < data->window.width)
+		x++;
+	else
+	{
+		x = 0;
+		y++;
+	}
+	if (y < data->window.height)
+		return (1);
+	data->rendering = false;
+	return (0);
+}

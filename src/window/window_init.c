@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-15 13:31:25 by smelicha          #+#    #+#             */
-/*   Updated: 2025-03-15 13:31:25 by smelicha         ###   ########.fr       */
+/*   Created: 2025/03/15 13:31:25 by smelicha          #+#    #+#             */
+/*   Updated: 2025/04/13 13:11:29 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	loop(void *param)
 		refresh_ts = current_ts + 100;
 		return ;
 	}
-	// if (window->data->rendering)
-	// 	render(window->data);
+	if (window->data->rendering)
+		render(window->data);
 	if (current_ts > refresh_ts)
 		refresh_routine(window);
 	if (window->exit)
@@ -118,7 +118,7 @@ int	window_init(t_window *window)
 	mlx_loop_hook(window->mlx, loop, window);
 	window->image = mlx_new_image(window->mlx, window->width, window->height);
 	mlx_image_to_window(window->mlx, window->image, 0, 0);
-	test_image_fill(window);
+	// test_image_fill(window);
 	printf("before mlx loop\n");
 	mlx_loop(window->mlx);
 	printf("after mlx loop\n");
