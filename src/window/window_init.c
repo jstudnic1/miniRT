@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 13:31:25 by smelicha          #+#    #+#             */
-/*   Updated: 2025/04/13 13:11:29 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:39:52 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	resize_handler(int new_x, int new_y, void *param)
 	mlx_delete_image(window->mlx, window->image);
 	window->image = NULL;
 	window->image = mlx_new_image(window->mlx, new_x, new_y);
-	test_image_fill(window);
+	window->data->rendering = render_restart;
 }
 
 void	exit_routine(t_window *window)
@@ -91,17 +91,19 @@ void	loop(void *param)
 	current_ts = ft_get_time();
 	if (refresh_ts == 0)
 	{
-		refresh_ts = current_ts + 100;
+		refresh_ts = current_ts + 100000;
 		return ;
 	}
-	if (window->data->rendering)
-		render(window->data);
+	render(window->data);
 	if (current_ts > refresh_ts)
+	{
 		refresh_routine(window);
+		refresh_ts = current_ts + 1000000;
+	}
 	if (window->exit)
 		exit_routine(window);
-
-	usleep(20000);
+	if (window->data->rendering == render_finished)
+		usleep(20000);
 }
 
 /**

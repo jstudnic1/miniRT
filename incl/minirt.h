@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 17:47:15 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/04/13 13:02:06 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:26:21 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,17 @@ typedef struct s_data t_data;
 
 typedef enum e_core_state
 {
-	run,
-	stop,
-	finish
+	core_run,
+	core_stop,
+	core_finish
 }	t_e_core_state;
+
+typedef enum e_render_state
+{
+	render_run,
+	render_finished,
+	render_restart
+}	t_e_render_state;
 
 /**
  * @brief 
@@ -83,11 +90,11 @@ typedef struct s_collision
  */
 typedef struct s_data
 {
-	t_window		window;
-	t_scene			*scene;
-	bool			rendering;
-	t_core			cores[N_THREADS];
-	pthread_mutex_t	print;
+	t_window			window;
+	t_scene				*scene;
+	t_e_render_state	rendering;
+	t_core				cores[N_THREADS];
+	pthread_mutex_t		print;
 }	t_data;
 
 /* VECTOR UTILS*/

@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 13:30:08 by smelicha          #+#    #+#             */
-/*   Updated: 2025/04/13 13:10:25 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:28:33 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,26 @@ int	render(t_data *data)
 	static uint32_t	y;
 	uint32_t		color = 125843;
 
-
-	mlx_put_pixel(data->window.image, x, y, color);
-	if (x < data->window.width)
-		x++;
-	else
+	if (data->rendering == render_finished)
+		return (0);
+	else if (data->rendering == render_restart)
 	{
 		x = 0;
-		y++;
+		y = 0;
+		data->rendering = render_run;
 	}
-	if (y < data->window.height)
-		return (1);
-	data->rendering = false;
+	else if (data->rendering == render_run)
+	{
+		while (x < data->window.width)
+		{
+			mlx_put_pixel(data->window.image, x, y, color);
+			x++;
+		}
+		x = 0;
+			y++;
+		if (y < data->window.height)
+			return (1);
+		data->rendering = render_finished;
+	}
 	return (0);
 }

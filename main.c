@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-14 17:14:29 by smelicha          #+#    #+#             */
-/*   Updated: 2025-03-14 17:14:29 by smelicha         ###   ########.fr       */
+/*   Created: 2025/03/14 17:14:29 by smelicha          #+#    #+#             */
+/*   Updated: 2025/04/13 13:32:20 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	scene_init(t_data *data, char **argv)
 
 void	data_init(t_data *data)
 {
-	data->rendering = false;
+	data->rendering = render_restart;
 	data->window.mlx = NULL;
 	data->window.image = NULL;
 	data->window.width = 640;
