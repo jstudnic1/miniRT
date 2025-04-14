@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deploy_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-15 19:51:28 by smelicha          #+#    #+#             */
-/*   Updated: 2025-03-15 19:51:28 by smelicha         ###   ########.fr       */
+/*   Created: 2025/03/15 19:51:28 by smelicha          #+#    #+#             */
+/*   Updated: 2025/04/14 14:43:07 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	*dummy_function(t_core *core)
 	while (true)
 	{
 		pthread_mutex_lock(&core->state_mtx);
-		if (core->state == run)
+		if (core->state == core_run)
 		{
 			pthread_mutex_lock(core->print);
 			printf("Hello from thread %i!\n", core->id);
 			pthread_mutex_unlock(core->print);
 		}
-		else if (core->state == finish)
+		else if (core->state == core_finish)
 		{
 			pthread_mutex_unlock(&core->state_mtx);
 			break ;
@@ -86,7 +86,7 @@ void	init_cores_data(t_data *data)
 		data->cores[i].y_start = 0;
 		data->cores[i].y_end = 0;
 		data->cores[i].print = &data->print;
-		data->cores[i].state = stop;
+		data->cores[i].state = core_stop;
 		i++;
 	}
 }
