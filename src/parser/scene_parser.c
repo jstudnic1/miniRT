@@ -114,53 +114,6 @@ static int	parse_light(char *line, t_scene *scene)
 	return (add_light(scene, light));
 }
 
-static int	parse_plane(char *line, t_scene *scene)
-{
-	char	**tokens;
-	t_plane	plane;
-
-	tokens = ft_split(line, ' ');
-	if (!tokens || double_array_length(tokens) != 4)
-	{
-		if (tokens)
-			ft_free_split(tokens);
-		return (0);
-	}
-	plane.point = parse_vector(tokens[1]);
-	plane.normal = parse_vector(tokens[2]);
-	plane.color = parse_color(tokens[3]);
-	ft_free_split(tokens);
-	if (isnan(plane.point.x) || isnan(plane.normal.x) || plane.color.r == -1 ||
-	    !is_normalized(plane.normal))
-		return (0);
-	return (add_plane(scene, plane));
-}
-
-static int	parse_cylinder(char *line, t_scene *scene)
-{
-	char		**tokens;
-	t_cylinder	cylinder;
-
-	tokens = ft_split(line, ' ');
-	if (!tokens || double_array_length(tokens) != 6)
-	{
-		if (tokens)
-			ft_free_split(tokens);
-		return (0);
-	}
-	cylinder.center = parse_vector(tokens[1]);
-	cylinder.axis = parse_vector(tokens[2]);
-	cylinder.diameter = ft_atof(tokens[3]);
-	cylinder.height = ft_atof(tokens[4]);
-	cylinder.color = parse_color(tokens[5]);
-	ft_free_split(tokens);
-	if (isnan(cylinder.center.x) || isnan(cylinder.axis.x) || cylinder.color.r == -1 ||
-	    !is_normalized(cylinder.axis) ||
-	    cylinder.diameter <= 0 || cylinder.height <= 0)
-		return (0);
-	return (add_cylinder(scene, cylinder));
-}
-
 t_scene	*parse_scene(char *filename)
 {
 	t_scene	*scene;
@@ -219,10 +172,10 @@ t_scene	*parse_scene(char *filename)
 			success = parse_camera(line, scene);
 		else if (strcmp(tokens[0], "L") == 0)
 			success = parse_light(line, scene);
-		else if (strcmp(tokens[0], "pl") == 0)
-			success = parse_plane(line, scene);
-		else if (strcmp(tokens[0], "cy") == 0)
-			success = parse_cylinder(line, scene);
+		else if (strcmp(tokens[0], "pl") == 0 || strcmp(tokens[0], "sp") == 0 || strcmp(tokens[0], "cy") == 0)
+		{
+			success = parse_objects(tokens[0], tokens, scene);
+		}
 		else
 		{
 			fprintf(stderr, "Error on line %d: Invalid identifier \"%s\".\n", line_num, tokens[0]);
@@ -254,3 +207,8 @@ t_scene	*parse_scene(char *filename)
 
 	return (scene);
 }
+
+/* Removed duplicate parse_objects function.
+   The correct one is in scene_parser_objects.c
+   and declared in minirt.h
+*/

@@ -68,6 +68,26 @@ void render_scene(t_data *data)
                 }
             }
 
+            // Check intersection with all spheres
+            for (i = 0; i < data->scene->num_spheres; i++)
+            {
+                current_hit = sphere_ray_collision(ray, data->scene->spheres[i]);
+                if (current_hit.hit && current_hit.t < closest_hit.t)
+                {
+                    closest_hit = current_hit;
+                }
+            }
+
+            // Check intersection with all cylinders
+            for (i = 0; i < data->scene->num_cylinders; i++)
+            {
+                current_hit = cylinder_ray_collision(ray, data->scene->cylinders[i]);
+                if (current_hit.hit && current_hit.t < closest_hit.t)
+                {
+                    closest_hit = current_hit;
+                }
+            }
+
             // Set pixel color based on intersection
             if (closest_hit.hit)
             {

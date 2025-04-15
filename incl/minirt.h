@@ -108,9 +108,13 @@ void		init_scene(t_scene *scene);
 void		free_scene(t_scene *scene);
 int			add_light(t_scene *scene, t_light light);
 int			add_plane(t_scene *scene, t_plane plane);
+int			add_sphere(t_scene *scene, t_sphere sphere);
 int			add_cylinder(t_scene *scene, t_cylinder cylinder);
 int			validate_scene(t_scene *scene);
-int			parse_objects(char *line, t_scene *scene);
+int			parse_objects(char *identifier, char **tokens, t_scene *scene);
+int			parse_plane(char **tokens, t_scene *scene);
+int			parse_sphere(char **tokens, t_scene *scene);
+int			parse_cylinder(char **tokens, t_scene *scene);
 t_vector	parse_vector(char *str);
 t_rgb		parse_color(char *str);
 int			double_array_length(char **array);
@@ -125,6 +129,7 @@ void	change_cores_state(t_data *data, t_e_core_state new_state);
 
 /* INTERSECTIONS */
 t_collision	plane_ray_collision(t_ray inc_ray, t_plane plane);
-// Add cylinder_ray_collision etc. here later
+t_collision	sphere_ray_collision(t_ray ray, t_sphere sphere);
+t_collision	cylinder_ray_collision(t_ray ray, t_cylinder cylinder);
 
 #endif

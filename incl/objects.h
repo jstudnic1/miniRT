@@ -33,10 +33,17 @@ typedef struct s_ray
 
 typedef struct s_plane
 {
-	t_vector	normal;
-	t_vector	point;
-	t_rgb		color;
-}			t_plane;
+	t_vector	point;     // A point on the plane
+	t_vector	normal;    // The normal vector to the plane
+	t_rgb		color;     // Color of the plane
+} t_plane;
+
+typedef struct s_sphere
+{
+	t_vector	center;    // Center point of the sphere
+	double		radius;    // Radius of the sphere
+	t_rgb		color;     // Color of the sphere
+} t_sphere;
 
 typedef struct s_camera
 {
@@ -73,10 +80,14 @@ typedef struct s_scene
 	t_camera	camera;
 	t_light		*lights;
 	t_plane		*planes;
+	t_sphere	*spheres;
 	t_cylinder	*cylinders;
 	int			num_lights;
 	int			num_planes;
+	int			num_spheres;
 	int			num_cylinders;
+	bool		ambient_parsed;
+	bool		camera_parsed;
 }				t_scene;
 
 /**

@@ -37,11 +37,16 @@ void	init_scene(t_scene *scene)
 	// Initialize counts
 	scene->num_lights = 0;
 	scene->num_planes = 0;
+	scene->num_spheres = 0;
 	scene->num_cylinders = 0;
 	// Initialize pointers (important if they are dynamically allocated later)
 	scene->lights = NULL;
 	scene->planes = NULL;
+	scene->spheres = NULL;
 	scene->cylinders = NULL;
+	// Initialize mandatory elements flags
+	scene->ambient_parsed = false;
+	scene->camera_parsed = false;
 	// Initialize mandatory elements to identifiable invalid states
 	scene->ambient.intensity = -1.0; // Indicate not set yet
 	scene->camera.fov = -1.0;       // Indicate not set yet
@@ -54,6 +59,7 @@ void	free_scene(t_scene *scene)
 		return;
 	free(scene->lights);
 	free(scene->planes);
+	free(scene->spheres);    // Free spheres array
 	free(scene->cylinders);
 	// Do NOT free the scene pointer itself here, caller allocated it.
 	// Only free the internal arrays.
@@ -94,6 +100,20 @@ int	add_plane(t_scene *scene, t_plane plane)
 	scene->planes = new_planes;
 	scene->planes[scene->num_planes] = plane;
 	scene->num_planes++;
+	return (1);
+}
+
+// Add sphere to the dynamic array in the scene
+int add_sphere(t_scene *scene, t_sphere sphere)
+{
+	t_sphere *new_spheres = realloc(scene->spheres, (scene->num_spheres + 1) * sizeof(t_sphere));
+	if (!new_spheres) {
+		perror("Failed to realloc spheres array");
+		return (0);
+	}
+	scene->spheres = new_spheres;
+	scene->spheres[scene->num_spheres] = sphere;
+	scene->num_spheres++;
 	return (1);
 }
 

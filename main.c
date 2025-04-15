@@ -98,8 +98,8 @@ int main(int argc, char **argv)
 	render_scene(&data);
 
 	// Display the window and handle events (like closing)
-	printf("Displaying window. Press ESC or close window to exit.\n");
-	mlx_loop(data.window.mlx);
+	// printf("Displaying window. Press ESC or close window to exit.\n");
+	// mlx_loop(data.window.mlx); // Commented out to exit after rendering
 
 	// Cleanup
 	printf("Cleaning up...\n");
