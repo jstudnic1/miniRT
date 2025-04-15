@@ -6,7 +6,7 @@
 /*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:16:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2024/06/07 10:16:00 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/04/06 11:13:57 by jstudnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,34 @@ t_vector	create_vector(double x, double y, double z)
 	vector.y = y;
 	vector.z = z;
 	return (vector);
+}
+
+/**
+ * @brief Multiplies each component of a vector by a scalar value.
+ *
+ * @param vec The vector to scale.
+ * @param scalar The scalar value to multiply by.
+ * @return t_vector The resulting scaled vector.
+ */
+t_vector	vec_mult_scalar(t_vector vec, double scalar)
+{
+	t_vector	result;
+
+	result.x = vec.x * scalar;
+	result.y = vec.y * scalar;
+	result.z = vec.z * scalar;
+	return (result);
+}
+
+/**
+ * @brief Checks if a vector is normalized (its length squared is close to 1).
+ *
+ * @param vec The vector to check.
+ * @return bool True if the vector is normalized, false otherwise.
+ */
+bool is_normalized(t_vector vec)
+{
+	double len_sq = vec_len2(vec);
+	// Compare the squared length to 1.0 using EPSILON for tolerance
+	return (fabs(len_sq - 1.0) < EPSILON);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-15 13:33:07 by smelicha          #+#    #+#             */
-/*   Updated: 2025-03-15 13:33:07 by smelicha         ###   ########.fr       */
+/*   Created: 2025/03/15 13:33:07 by smelicha          #+#    #+#             */
+/*   Updated: 2025/04/06 11:34:56 by jstudnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /**
  * @brief Handles key presses...
- * 
- * @param key 
- * @param param 
+ *
+ * @param key
+ * @param param
  */
 void	key_handler(mlx_key_data_t key, void *param)
 {
@@ -27,10 +27,7 @@ void	key_handler(mlx_key_data_t key, void *param)
 	if (key.key == MLX_KEY_ESCAPE)
 	{
 		printf("esc pressed\n");
-		mlx_delete_image(data->window.mlx, data->window.image);
-		data->window.image = NULL;
 		mlx_close_window(data->window.mlx);
-		data->window.mlx = NULL;
 	}
 	else if (key.key == MLX_KEY_R)
 	{

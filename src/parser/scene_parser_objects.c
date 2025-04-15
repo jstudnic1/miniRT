@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parser_objects.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:17:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/03/14 16:18:03 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/04/06 11:17:35 by jstudnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
 
-static int	parse_light(char *line, t_scene *scene)
+int	parse_light(char *line, t_scene *scene)
 {
 	char	**tokens;
 	t_light	light;
@@ -33,7 +33,7 @@ static int	parse_light(char *line, t_scene *scene)
 	return (add_light(scene, light));
 }
 
-static int	parse_plane(char *line, t_scene *scene)
+int	parse_plane(char *line, t_scene *scene)
 {
 	char	**tokens;
 	t_plane	plane;
@@ -54,7 +54,7 @@ static int	parse_plane(char *line, t_scene *scene)
 	return (add_plane(scene, plane));
 }
 
-static int	parse_cylinder(char *line, t_scene *scene)
+int	parse_cylinder(char *line, t_scene *scene)
 {
 	char		**tokens;
 	t_cylinder	cylinder;
@@ -87,4 +87,4 @@ int	parse_objects(char *line, t_scene *scene)
 	else if (line[0] == 'c' && line[1] == 'y')
 		return (parse_cylinder(line, scene));
 	return (0);
-} 
+}
