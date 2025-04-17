@@ -80,11 +80,6 @@ typedef struct s_window
 	bool		res_change;	//TODO init value and use it when the resolution changes
 }	t_window;
 
-typedef struct s_collision
-{
-	t_rgb		surface_color;
-	t_ray		normal;
-}	t_collision;
 
 /**
  * @brief

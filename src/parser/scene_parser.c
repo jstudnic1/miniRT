@@ -76,7 +76,6 @@ static int	parse_ambient(char *line, t_scene *scene)
 	ft_free_split(tokens);
 	if (scene->ambient.color.r == -1 || scene->ambient.intensity < 0.0 || scene->ambient.intensity > 1.0)
 		return (0);
-	}
 	return (1);
 }
 
@@ -100,7 +99,6 @@ static int	parse_camera(char *line, t_scene *scene)
 		!is_normalized(scene->camera.orientation) ||
 		scene->camera.fov <= 0 || scene->camera.fov >= 180)
 		return (0);
-	}
 	return (1);
 }
 
@@ -123,7 +121,6 @@ static int	parse_light(char *line, t_scene *scene)
 	ft_free_split(tokens);
 	if (isnan(light.position.x) || light.color.r == -1 || light.brightness < 0.0 || light.brightness > 1.0)
 		return (0);
-	}
 	return (add_light(scene, light));
 }
 

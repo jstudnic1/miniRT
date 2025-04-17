@@ -14,7 +14,9 @@
 # define OBJECTS_H
 
 #include "color.h"
+// #include <cstdint>
 #include <stdbool.h>
+#include <stdint.h>
 
 typedef struct s_vector
 {
@@ -68,11 +70,6 @@ typedef struct s_cylinder
 	t_rgb		color;
 }				t_cylinder;
 
-typedef struct s_sphere
-{
-	//TODO finish :D
-}	t_sphere;
-
 typedef struct s_ambient
 {
 	double		intensity;
@@ -91,6 +88,8 @@ typedef struct s_scene
 	int			num_planes;
 	int			num_spheres;
 	int			num_cylinders;
+	uint32_t	*width_pixels;
+	uint32_t	*height_pixels;
 	bool		ambient_parsed;
 	bool		camera_parsed;
 }				t_scene;

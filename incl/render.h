@@ -5,7 +5,7 @@
 
 // Function prototypes for rendering
 void		render_scene(t_data *data);
-t_ray		generate_primary_ray(int x, int y, t_scene *scene, t_window *window);
+t_ray		generate_primary_ray(int x, int y, t_scene *scene);
 
 // Intersection functions
 t_collision plane_ray_collision(t_ray inc_ray, t_plane plane);

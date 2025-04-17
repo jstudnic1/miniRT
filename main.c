@@ -12,7 +12,6 @@
 
 #include "MLX42/include/MLX42/MLX42.h"
 #include "incl/minirt.h"
-#include "incl/render.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,6 +47,8 @@ int	scene_init(t_data *data, char *filename)
 	printf("Scene parsing successful.\n");
 	// Normalize camera orientation vector ONCE here
 	normalize_vec(&data->scene->camera.orientation);
+	data->scene->width_pixels = &data->window.width;
+	data->scene->height_pixels = &data->window.height;
 	return (0);
 }
 
@@ -78,7 +79,7 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	data_init(&data);
-	scene_init(&data, argv);
+	scene_init(&data, argv[1]);
 	// deploy_threads(&data);
 	window_init(&data.window);
 	if (data.window.image)
