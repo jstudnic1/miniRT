@@ -236,13 +236,16 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 	t_ray	ray;
 	t_collision	closest_hit;
 	t_collision	current_hit;
-	t_vector	view_dir;
+	// t_vector	view_dir;
 	int			i;
 
 
 	ray = generate_primary_ray(x, y, scene);
 	i = 0;
 
+	pixel_value.b = 0;
+	pixel_value.g = 0;
+	pixel_value.r = 0;
 	// Initialize closest hit
 	closest_hit.hit = false;
 	closest_hit.t = RAY_T_MAX;
@@ -253,6 +256,7 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		current_hit = plane_ray_collision(ray, scene->planes[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
 		{
+			pixel_value = scene->planes[i].color;
 			closest_hit = current_hit;
 		}
 	}
@@ -263,6 +267,7 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		current_hit = sphere_ray_collision(ray, scene->spheres[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
 		{
+			pixel_value = scene->spheres[i].color;
 			closest_hit = current_hit;
 		}
 	}
@@ -273,26 +278,27 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		current_hit = cylinder_ray_collision(ray, scene->cylinders[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
 		{
+			pixel_value = scene->cylinders[i].color;
 			closest_hit = current_hit;
 		}
 	}
 
 	// Set pixel color based on intersection
-	if (closest_hit.hit)
-	{
-		// Calculate view direction (from hit point to camera)
-		view_dir = vec_sub(scene->camera.position, closest_hit.point);
-		normalize_vec(&view_dir);
+	// if (closest_hit.hit)
+	// {
+	// 	// Calculate view direction (from hit point to camera)
+	// 	view_dir = vec_sub(scene->camera.position, closest_hit.point);
+	// 	normalize_vec(&view_dir);
 
-		// Calculate lighting
-		pixel_value = calculate_lighting(closest_hit, scene, view_dir);
-	}
-	else
-	{
-		pixel_value.r = 0;
-		pixel_value.g = 0;
-		pixel_value.b = 0;
-	}
+	// 	// Calculate lighting
+	// 	pixel_value = calculate_lighting(closest_hit, scene, view_dir);
+	// }
+	// else
+	// {
+	// 	pixel_value.r = 0;
+	// 	pixel_value.g = 0;
+	// 	pixel_value.b = 0;
+	// }
 	return (pixel_value);
 }
 
