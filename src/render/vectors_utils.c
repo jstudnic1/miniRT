@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
+#include <math.h>
 
 double	vec_len(t_vector vector)
 {

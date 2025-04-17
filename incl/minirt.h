@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 17:47:15 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/04/06 11:13:42 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:26:21 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,28 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <string.h>
+# include <sys/time.h>
 
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f
 # define N_THREADS 12
 # define EPSILON 1e-6
 
+typedef struct s_data t_data;
+
 typedef enum e_core_state
 {
-	run,
-	stop,
-	finish
+	core_run,
+	core_stop,
+	core_finish
 }	t_e_core_state;
+
+typedef enum e_render_state
+{
+	render_run,
+	render_finished,
+	render_restart
+}	t_e_render_state;
 
 /**
  * @brief
@@ -61,11 +71,20 @@ typedef struct s_core
  */
 typedef struct s_window
 {
+	t_data		*data;
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	uint32_t	width;
 	uint32_t	height;
+	bool		exit;
+	bool		res_change;	//TODO init value and use it when the resolution changes
 }	t_window;
+
+typedef struct s_collision
+{
+	t_rgb		surface_color;
+	t_ray		normal;
+}	t_collision;
 
 /**
  * @brief
@@ -73,10 +92,11 @@ typedef struct s_window
  */
 typedef struct s_data
 {
-	t_window		window;
-	t_scene			*scene;
-	t_core			cores[N_THREADS];
-	pthread_mutex_t	print;
+	t_window			window;
+	t_scene				*scene;
+	t_e_render_state	rendering;
+	t_core				cores[N_THREADS];
+	pthread_mutex_t		print;
 }	t_data;
 
 /* VECTOR UTILS*/
@@ -101,6 +121,9 @@ bool		is_normalized(t_vector vec);
 
 /* RAYS */
 t_ray		create_ray(t_vector origin, t_vector direction);
+
+/* RENDERING */
+int			render(t_data *data);
 
 /* SCENE PARSER */
 t_scene		*parse_scene(char *filename);
@@ -131,5 +154,11 @@ void	change_cores_state(t_data *data, t_e_core_state new_state);
 t_collision	plane_ray_collision(t_ray inc_ray, t_plane plane);
 t_collision	sphere_ray_collision(t_ray ray, t_sphere sphere);
 t_collision	cylinder_ray_collision(t_ray ray, t_cylinder cylinder);
+/* UTILS */
+uint64_t	ft_get_time(void);
+
+/* DEBUG */
+void	print_scene(t_scene *scene);
+void	print_vector(const char *vec_name, t_vector *vector);
 
 #endif

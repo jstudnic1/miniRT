@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:30:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/04/07 17:37:53 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:42:23 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-#include <stdint.h> // For uint32_t, uint8_t
+#include <stdint.h>
 
 typedef struct s_rgb
 {

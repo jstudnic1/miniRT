@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:14:29 by smelicha          #+#    #+#             */
-/*   Updated: 2025/04/06 11:07:44 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:32:20 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ int	scene_init(t_data *data, char *filename)
 
 void	data_init(t_data *data)
 {
+	data->rendering = render_restart;
 	data->window.mlx = NULL;
 	data->window.image = NULL;
 	data->window.width = 640;
 	data->window.height = 480;
 	data->scene = NULL;
-	// Mutex needed only for threaded version
-	// pthread_mutex_init(&data->print, NULL);
+	data->window.exit = false;
+	data->window.data = data;
 }
 
 /**
@@ -75,39 +76,12 @@ int main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: %s <scene_file.rt>\n", argv[0]);
-		return (EXIT_FAILURE);
-	}
+		return (0);
 	data_init(&data);
-
-	// Initialize scene from argument
-	if (scene_init(&data, argv[1]) != 0)
-	{
-		return (EXIT_FAILURE);
-	}
-
-	// Initialize window and image buffer
-	if (window_init(&data.window) != 0)
-	{
-		free_scene(data.scene);
-		return (EXIT_FAILURE);
-	}
-
-	// Render the scene to the image buffer
-	render_scene(&data);
-
-	// Display the window and handle events (like closing)
-	// printf("Displaying window. Press ESC or close window to exit.\n");
-	// mlx_loop(data.window.mlx); // Commented out to exit after rendering
-
-	// Cleanup
-	printf("Cleaning up...\n");
-	// mlx_delete_image is often handled by mlx_terminate
-	mlx_terminate(data.window.mlx);
-	free_scene(data.scene);
-	// pthread_mutex_destroy(&data.print); // Only if mutex was initialized
-
-	printf("Exiting.\n");
-	return (EXIT_SUCCESS);
+	scene_init(&data, argv);
+	// deploy_threads(&data);
+	window_init(&data.window);
+	if (data.window.image)
+		mlx_delete_image(data.window.mlx, data.window.image);
+	return (0);
 }

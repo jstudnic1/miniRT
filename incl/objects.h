@@ -68,6 +68,11 @@ typedef struct s_cylinder
 	t_rgb		color;
 }				t_cylinder;
 
+typedef struct s_sphere
+{
+	//TODO finish :D
+}	t_sphere;
+
 typedef struct s_ambient
 {
 	double		intensity;
