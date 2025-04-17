@@ -17,18 +17,20 @@
 # include "objects.h"
 # include "libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
-#include <bits/pthreadtypes.h>
+//#include <bits/pthreadtypes.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <pthread.h>
+# include <string.h>
 # include <sys/time.h>
 
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f
 # define N_THREADS 12
+# define EPSILON 1e-6
 
 typedef struct s_data t_data;
 
@@ -47,8 +49,8 @@ typedef enum e_render_state
 }	t_e_render_state;
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 typedef struct s_core
 {
@@ -64,8 +66,8 @@ typedef struct s_core
 }	t_core;
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 typedef struct s_window
 {
@@ -85,8 +87,8 @@ typedef struct s_collision
 }	t_collision;
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 typedef struct s_data
 {
@@ -111,6 +113,12 @@ t_vector	vec_sub(t_vector u, t_vector v);
 t_vector	vec_mult(t_vector u, t_vector v);
 t_vector	vec_div(t_vector u, t_vector v);
 
+/* VECTOR SCALAR OPERATIONS */
+t_vector	vec_mult_scalar(t_vector vec, double scalar);
+
+/* VECTOR CHECKS */
+bool		is_normalized(t_vector vec);
+
 /* RAYS */
 t_ray		create_ray(t_vector origin, t_vector direction);
 
@@ -123,9 +131,13 @@ void		init_scene(t_scene *scene);
 void		free_scene(t_scene *scene);
 int			add_light(t_scene *scene, t_light light);
 int			add_plane(t_scene *scene, t_plane plane);
+int			add_sphere(t_scene *scene, t_sphere sphere);
 int			add_cylinder(t_scene *scene, t_cylinder cylinder);
 int			validate_scene(t_scene *scene);
-int			parse_objects(char *line, t_scene *scene);
+int			parse_objects(char *identifier, char **tokens, t_scene *scene);
+int			parse_plane(char **tokens, t_scene *scene);
+int			parse_sphere(char **tokens, t_scene *scene);
+int			parse_cylinder(char **tokens, t_scene *scene);
 t_vector	parse_vector(char *str);
 t_rgb		parse_color(char *str);
 int			double_array_length(char **array);
@@ -138,6 +150,10 @@ void	key_handler(mlx_key_data_t key, void *param);
 int		deploy_threads(t_data *data);
 void	change_cores_state(t_data *data, t_e_core_state new_state);
 
+/* INTERSECTIONS */
+t_collision	plane_ray_collision(t_ray inc_ray, t_plane plane);
+t_collision	sphere_ray_collision(t_ray ray, t_sphere sphere);
+t_collision	cylinder_ray_collision(t_ray ray, t_cylinder cylinder);
 /* UTILS */
 uint64_t	ft_get_time(void);
 

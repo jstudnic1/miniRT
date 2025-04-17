@@ -12,24 +12,42 @@
 
 #include "MLX42/include/MLX42/MLX42.h"
 #include "incl/minirt.h"
+#include "incl/render.h"
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define EPSILON if not already defined globally (e.g., in minirt.h)
+// #ifndef EPSILON
+// # define EPSILON 1e-6
+// #endif
 
 /**
  * @brief Calls parser and validates input file
- TODO test the working state of the parser
- * 
+ *
  * @param data main data struct
- * @param argv command line argument
- * @return int 0 - OK, -1 - NOK
+ * @param filename Path to the scene file.
+ * @return int 0 - OK, -1 - Error
  */
-int	scene_init(t_data *data, char **argv)
+int	scene_init(t_data *data, char *filename)
 {
-	if (double_array_length(argv) != 2)
+	printf("Parsing scene file: %s\n", filename);
+	data->scene = parse_scene(filename);
+	if (!data->scene)
+	{
+		fprintf(stderr, "Error: Failed to parse scene file.\n");
 		return (-1);
-	data->scene = parse_scene(argv[1]);
-	printf("scene poiner: %p\n", data->scene);
-	print_scene(data->scene);
-	data->rendering = true;
+	}
+	if (validate_scene(data->scene) != 0)
+	{
+		fprintf(stderr, "Error: Invalid scene configuration.\n");
+		free_scene(data->scene);
+		data->scene = NULL;
+		return (-1);
+	}
+	printf("Scene parsing successful.\n");
+	// Normalize camera orientation vector ONCE here
+	normalize_vec(&data->scene->camera.orientation);
 	return (0);
 }
 
@@ -46,12 +64,12 @@ void	data_init(t_data *data)
 }
 
 /**
- * @brief 
+ * @brief
  TODO check for returns of the functions like scene init which should validate the input file, perhaps make an "development check exception"
- * 
- * @param argc 
- * @param argv 
- * @return int 
+ *
+ * @param argc
+ * @param argv
+ * @return int
  */
 int main(int argc, char **argv)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parser_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:00:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/03/14 16:18:22 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/04/06 11:14:15 by jstudnic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,102 +24,122 @@ int	double_array_length(char **array)
 	return (i);
 }
 
+/**
+ * @brief Initializes the scene struct, setting counts to 0 and pointers to NULL.
+ * This is crucial before parsing begins, especially for dynamic arrays.
+ *
+ * @param scene The scene struct to initialize.
+ */
 void	init_scene(t_scene *scene)
 {
-	scene->lights = NULL;
-	scene->planes = NULL;
-	scene->cylinders = NULL;
+	if (!scene)
+		return;
+	// Initialize counts
 	scene->num_lights = 0;
 	scene->num_planes = 0;
+	scene->num_spheres = 0;
 	scene->num_cylinders = 0;
+	// Initialize pointers (important if they are dynamically allocated later)
+	scene->lights = NULL;
+	scene->planes = NULL;
+	scene->spheres = NULL;
+	scene->cylinders = NULL;
+	// Initialize mandatory elements flags
+	scene->ambient_parsed = false;
+	scene->camera_parsed = false;
+	// Initialize mandatory elements to identifiable invalid states
+	scene->ambient.intensity = -1.0; // Indicate not set yet
+	scene->camera.fov = -1.0;       // Indicate not set yet
 }
 
+// Placeholder for free_scene - ensure it frees allocated arrays
 void	free_scene(t_scene *scene)
 {
 	if (!scene)
-		return ;
-	if (scene->lights)
-		free(scene->lights);
-	if (scene->planes)
-		free(scene->planes);
-	if (scene->cylinders)
-		free(scene->cylinders);
-	free(scene);
+		return;
+	free(scene->lights);
+	free(scene->planes);
+	free(scene->spheres);    // Free spheres array
+	free(scene->cylinders);
+	// Do NOT free the scene pointer itself here, caller allocated it.
+	// Only free the internal arrays.
 }
 
+// Placeholder for add_light (assuming dynamic array)
+// Needs reallocation logic (e.g., realloc)
 int	add_light(t_scene *scene, t_light light)
 {
-	t_light	*new_lights;
+	// Simple implementation without dynamic resizing (for fixed array or testing)
+	// if (scene->num_lights < MAX_LIGHTS) { // If using fixed array
+	//     scene->lights[scene->num_lights] = light;
+	//     scene->num_lights++;
+	//     return (1);
+	// }
+	// return (0); // Failed to add
 
-	new_lights = malloc(sizeof(t_light) * (scene->num_lights + 1));
-	if (!new_lights)
-		return (0);
-	if (scene->lights)
-	{
-		ft_memcpy(new_lights, scene->lights,
-			sizeof(t_light) * scene->num_lights);
-		free(scene->lights);
+	// Basic dynamic array implementation (example)
+	t_light *new_lights = realloc(scene->lights, (scene->num_lights + 1) * sizeof(t_light));
+	if (!new_lights) {
+		perror("Failed to realloc lights array");
+		return (0); // Allocation failed
 	}
-	new_lights[scene->num_lights] = light;
 	scene->lights = new_lights;
+	scene->lights[scene->num_lights] = light;
 	scene->num_lights++;
 	return (1);
 }
 
+// Placeholder for add_plane (assuming dynamic array)
 int	add_plane(t_scene *scene, t_plane plane)
 {
-	t_plane	*new_planes;
-
-	new_planes = malloc(sizeof(t_plane) * (scene->num_planes + 1));
-	if (!new_planes)
+	t_plane *new_planes = realloc(scene->planes, (scene->num_planes + 1) * sizeof(t_plane));
+	if (!new_planes) {
+		perror("Failed to realloc planes array");
 		return (0);
-	if (scene->planes)
-	{
-		ft_memcpy(new_planes, scene->planes,
-			sizeof(t_plane) * scene->num_planes);
-		free(scene->planes);
 	}
-	new_planes[scene->num_planes] = plane;
 	scene->planes = new_planes;
+	scene->planes[scene->num_planes] = plane;
 	scene->num_planes++;
 	return (1);
 }
 
+// Add sphere to the dynamic array in the scene
+int add_sphere(t_scene *scene, t_sphere sphere)
+{
+	t_sphere *new_spheres = realloc(scene->spheres, (scene->num_spheres + 1) * sizeof(t_sphere));
+	if (!new_spheres) {
+		perror("Failed to realloc spheres array");
+		return (0);
+	}
+	scene->spheres = new_spheres;
+	scene->spheres[scene->num_spheres] = sphere;
+	scene->num_spheres++;
+	return (1);
+}
+
+// Placeholder for add_cylinder (assuming dynamic array)
 int	add_cylinder(t_scene *scene, t_cylinder cylinder)
 {
-	t_cylinder	*new_cylinders;
-
-	new_cylinders = malloc(sizeof(t_cylinder) * (scene->num_cylinders + 1));
-	if (!new_cylinders)
+	t_cylinder *new_cylinders = realloc(scene->cylinders, (scene->num_cylinders + 1) * sizeof(t_cylinder));
+	if (!new_cylinders) {
+		perror("Failed to realloc cylinders array");
 		return (0);
-	if (scene->cylinders)
-	{
-		ft_memcpy(new_cylinders, scene->cylinders,
-			sizeof(t_cylinder) * scene->num_cylinders);
-		free(scene->cylinders);
 	}
-	new_cylinders[scene->num_cylinders] = cylinder;
 	scene->cylinders = new_cylinders;
+	scene->cylinders[scene->num_cylinders] = cylinder;
 	scene->num_cylinders++;
 	return (1);
 }
 
 int	validate_scene(t_scene *scene)
 {
-	// Check if we have exactly one camera
-	if (scene->camera.fov < 0 || scene->camera.fov > 180)
-		return (0);
-	
-	// Check if we have exactly one ambient light
-	if (scene->ambient.intensity < 0 || scene->ambient.intensity > 1)
-		return (0);
-	
-	// Validate all vectors are normalized where needed
-	normalize_vec(&scene->camera.orientation);
-	for (int i = 0; i < scene->num_planes; i++)
-		normalize_vec(&scene->planes[i].normal);
-	for (int i = 0; i < scene->num_cylinders; i++)
-		normalize_vec(&scene->cylinders[i].axis);
-	
-	return (1);
-} 
+	// This function might be redundant now if parsing functions do all checks,
+	// or it could double-check for mandatory elements.
+	if (!scene || scene->ambient.intensity < 0.0 || scene->camera.fov <= 0)
+	{
+		fprintf(stderr, "Error: Scene validation failed (Missing A or C?).\n");
+		return (-1); // Indicate failure
+	}
+	// Add more checks if needed
+	return (0); // Indicate success
+}

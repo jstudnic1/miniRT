@@ -26,4 +26,11 @@ typedef struct s_rgb
 t_rgb	create_rgb(int r, int g, int b);
 int		validate_rgb(t_rgb color);
 
+/* Conversions */
+uint32_t	rgb_to_uint32(t_rgb color);
+
+// Color utilities
+int min(int a, int b);
+int max(int a, int b);
+
 #endif
