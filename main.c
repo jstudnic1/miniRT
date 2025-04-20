@@ -79,7 +79,8 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	data_init(&data);
-	scene_init(&data, argv[1]);
+	if (scene_init(&data, argv[1]) < 0)
+		return (-1);
 	// deploy_threads(&data);
 	window_init(&data.window);
 	if (data.window.image)

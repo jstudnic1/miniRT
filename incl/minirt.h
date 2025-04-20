@@ -130,20 +130,20 @@ int			add_sphere(t_scene *scene, t_sphere sphere);
 int			add_cylinder(t_scene *scene, t_cylinder cylinder);
 int			validate_scene(t_scene *scene);
 int			parse_objects(char *identifier, char **tokens, t_scene *scene);
-int			parse_plane(char **tokens, t_scene *scene);
-int			parse_sphere(char **tokens, t_scene *scene);
-int			parse_cylinder(char **tokens, t_scene *scene);
+int			parse_plane(char *line, t_scene *scene);
+int			parse_sphere(char *line, t_scene *scene);
+int			parse_cylinder(char *line, t_scene *scene);
 t_vector	parse_vector(char *str);
 t_rgb		parse_color(char *str);
 int			double_array_length(char **array);
 
 /* WINDOW */
-int		window_init(t_window *window);
-void	key_handler(mlx_key_data_t key, void *param);
+int			window_init(t_window *window);
+void		key_handler(mlx_key_data_t key, void *param);
 
 /* THREADS */
-int		deploy_threads(t_data *data);
-void	change_cores_state(t_data *data, t_e_core_state new_state);
+int			deploy_threads(t_data *data);
+void		change_cores_state(t_data *data, t_e_core_state new_state);
 
 /* INTERSECTIONS */
 t_collision	plane_ray_collision(t_ray inc_ray, t_plane plane);
@@ -151,9 +151,10 @@ t_collision	sphere_ray_collision(t_ray ray, t_sphere sphere);
 t_collision	cylinder_ray_collision(t_ray ray, t_cylinder cylinder);
 /* UTILS */
 uint64_t	ft_get_time(void);
+int			str_comp(const char *str1, const char *str2);
 
 /* DEBUG */
-void	print_scene(t_scene *scene);
-void	print_vector(const char *vec_name, t_vector *vector);
+void		print_scene(t_scene *scene);
+void		print_vector(const char *vec_name, t_vector *vector);
 
 #endif
