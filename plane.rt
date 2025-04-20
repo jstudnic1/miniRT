@@ -1,9 +1,11 @@
 A 0.2 255,255,255
 # C 0.5,0.5,1 0,1,0 90 # Original camera (looking up)
-C 0,0,5 0,0,-1 70 # New camera (pos z=5, looking towards -z)
+
+# New camera (pos z=5, looking towards -z)
+C 0,0,0 0,0,-1 70
 
 # Move light below the plane so the diffuse component is visible
 L 0,0,2 1 255,255,255
 
 # Plane at z=0, normal pointing towards the camera (0,0,1)
-pl 0,0,0 0,0,1 125,0,100
+pl 0,0,-10 0,0,1 125,0,100

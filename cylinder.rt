@@ -4,13 +4,13 @@
 A 0.2 255,255,255
 
 # Camera: at origin, looking down -Z axis, 70 FOV
-C 0,0,10 0,0.5,-1 170
+C 0,0,10 0,0,-1 170
 
 # Light source: point light, off-axis, moderate brightness
 L -5,5,-5 0.7 255,255,255
 
 # Cylinder: center at (0, 0, -6), axis (0, 1, 0), diameter 2, height 4, color blue
-cy 0,0,-6 0,1,0 20 40 0,250,0
+cy 0,0,-6 0,1,0 2 4 0,250,0
 
 #oriented camera [0,1,0] means "up" is oriented in vector y (like normaly)
 #try position [2,2,5], [2,20,5] where more y is higher (far from red plain)..

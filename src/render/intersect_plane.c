@@ -35,7 +35,7 @@ t_collision	plane_ray_collision(t_ray ray, t_plane plane)
 	double		numerator;
 	double		t;
 	t_vector	p0_minus_ray_origin;
-	static int debug_count = 0;
+	// static int debug_count = 0;
 
 	collision_data.hit = false;
 	collision_data.t = INFINITY;
@@ -60,19 +60,19 @@ t_collision	plane_ray_collision(t_ray ray, t_plane plane)
 	t = numerator / denominator;
 
 	// Print debug info for the first 5 rays only
-	if (debug_count < 5)
-	{
-		printf("=== Plane Intersection Debug #%d ===\n", debug_count++);
-		printf("Ray: origin=(%f, %f, %f), direction=(%f, %f, %f)\n",
-			ray.origin.x, ray.origin.y, ray.origin.z,
-			ray.direction.x, ray.direction.y, ray.direction.z);
-		printf("Plane: point=(%f, %f, %f), normal=(%f, %f, %f)\n",
-			plane.point.x, plane.point.y, plane.point.z,
-			plane.normal.x, plane.normal.y, plane.normal.z);
-		printf("Calculation: dot(dir, normal)=%f, dot(point-origin, normal)=%f\n",
-			denominator, numerator);
-		printf("Result: t=%f\n", t);
-	}
+	// if (debug_count < 5)
+	// {
+	// 	printf("=== Plane Intersection Debug #%d ===\n", debug_count++);
+	// 	printf("Ray: origin=(%f, %f, %f), direction=(%f, %f, %f)\n",
+	// 		ray.origin.x, ray.origin.y, ray.origin.z,
+	// 		ray.direction.x, ray.direction.y, ray.direction.z);
+	// 	printf("Plane: point=(%f, %f, %f), normal=(%f, %f, %f)\n",
+	// 		plane.point.x, plane.point.y, plane.point.z,
+	// 		plane.normal.x, plane.normal.y, plane.normal.z);
+	// 	printf("Calculation: dot(dir, normal)=%f, dot(point-origin, normal)=%f\n",
+	// 		denominator, numerator);
+	// 	printf("Result: t=%f\n", t);
+	// }
 
 	// Check if intersection is in the valid range (in front of the ray origin)
 	if (t > RAY_T_MIN && t < RAY_T_MAX)
@@ -84,15 +84,15 @@ t_collision	plane_ray_collision(t_ray ray, t_plane plane)
 		collision_data.normal = plane.normal;
 		collision_data.color = plane.color;
 
-		if (debug_count <= 5) {
-			printf("Hit found at point (%f, %f, %f), t=%f\n\n",
-				collision_data.point.x, collision_data.point.y, collision_data.point.z, t);
-		}
+		// if (debug_count <= 5) {
+		// 	printf("Hit found at point (%f, %f, %f), t=%f\n\n",
+		// 		collision_data.point.x, collision_data.point.y, collision_data.point.z, t);
+		// }
 	}
-	else if (debug_count <= 5)
-	{
-		printf("No hit - t outside valid range [%f, %f]\n\n", RAY_T_MIN, RAY_T_MAX);
-	}
+	// else if (debug_count <= 5)
+	// {
+	// 	printf("No hit - t outside valid range [%f, %f]\n\n", RAY_T_MIN, RAY_T_MAX);
+	// }
 
 	return (collision_data);
 }

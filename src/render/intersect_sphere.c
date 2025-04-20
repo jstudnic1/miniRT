@@ -71,11 +71,12 @@ t_collision sphere_ray_collision(t_ray ray, t_sphere sphere)
 	// 4. Calculate the discriminant
 	delta = b * b - 4.0 * a * c;
 
+	// printf("sphere delta: %f\n", delta);
 	// 5. Check if ray misses the sphere
-	if (delta < 0)
-	{
-		return (collision_data); // No real roots, no intersection
-	}
+	// if (delta < 0)
+	// {
+	// 	return (collision_data); // No real roots, no intersection
+	// }
 
 	// 6. Calculate potential intersection distances t0 and t1
 	sqrt_delta = sqrt(delta);
