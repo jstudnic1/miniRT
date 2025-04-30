@@ -1,118 +1,67 @@
-//<<<<<<< render_development_jstudnic
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/05 13:30:08 by smelicha          #+#    #+#             */
+/*   Updated: 2025/04/14 14:49:12 by smelicha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../incl/minirt.h"
 #include "../../incl/render.h"
+#include <stdint.h>
 #include <math.h>
 
-// Placeholder for render_scene - will implement later
-// void render_scene(t_data *data)
-// {
-//     // To be implemented
-//     (void)data; // Prevent unused parameter warning for now
-//     printf("Placeholder: render_scene called.\n");
-// }
+#define R_SHIFT 24
+#define G_SHIFT 16
+#define B_SHIFT 8
 
-/**
- * @brief Renders the entire scene pixel by pixel (single-threaded).
- *
- * @param data Main data structure containing scene and window info.
- */
-// void render_scene(t_data *data)
-// {
-//     int			x, y;
-//     t_ray		ray;
-//     t_collision	closest_hit;
-//     t_collision current_hit;
-//     uint32_t	pixel_color;
-//     int			i;
-//     t_rgb       lit_color;
-//     t_vector    view_dir;
+typedef struct s_gpr
+{
+	t_ray		ray;
+	t_camera	*cam;
+	t_vector	cam_forward;
+	t_vector	world_up;
+	t_vector	cam_right;
+	t_vector	cam_up;
+	t_vector	direction;
+	double		aspect_ratio;
+	double		fov_rad;
+	double		fov_scale;
+	double		ndc_x ;
+	double		ndc_y;
+	double		screen_x;
+	double		screen_y;
+}	t_gpr;
 
-//     if (!data || !data->scene || !data->window.mlx || !data->window.image)
-//     {
-//         fprintf(stderr, "Error: Invalid data for rendering.\n");
-//         return;
-//     }
 
-//     // Debug: Print camera basis vectors for the first pixel
-//     printf("\n=== Camera Debug Info ===\n");
-//     t_camera *cam = &data->scene->camera;
-//     printf("Camera Position: (%f, %f, %f)\n", cam->position.x, cam->position.y, cam->position.z);
-//     printf("Camera Orientation: (%f, %f, %f)\n", cam->orientation.x, cam->orientation.y, cam->orientation.z);
-//     printf("Camera FOV: %f\n", cam->fov);
-
-//     printf("Starting single-threaded render...\n");
-//     y = 0;
-//     while (y < (int)data->window.height)
-//     {
-//         x = 0;
-//         while (x < (int)data->window.width)
-//         {
-//             ray = generate_primary_ray(x, y, data->scene, &data->window);
-
-//             // Debug: Print ray info for center pixel
-//             if (x == data->window.width / 2 && y == data->window.height / 2) {
-//                 printf("\n=== Center Pixel Ray Info ===\n");
-//                 printf("Ray Origin: (%f, %f, %f)\n", ray.origin.x, ray.origin.y, ray.origin.z);
-//                 printf("Ray Direction: (%f, %f, %f)\n", ray.direction.x, ray.direction.y, ray.direction.z);
-//             }
-
-//             // Initialize closest hit
-//             closest_hit.hit = false;
-//             closest_hit.t = RAY_T_MAX;
-
-//             // Check intersection with all planes
-//             for (i = 0; i < data->scene->num_planes; i++)
-//             {
-//                 current_hit = plane_ray_collision(ray, data->scene->planes[i]);
-//                 if (current_hit.hit && current_hit.t < closest_hit.t)
-//                 {
-//                     closest_hit = current_hit;
-//                 }
-//             }
-
-//             // Check intersection with all spheres
-//             for (i = 0; i < data->scene->num_spheres; i++)
-//             {
-//                 current_hit = sphere_ray_collision(ray, data->scene->spheres[i]);
-//                 if (current_hit.hit && current_hit.t < closest_hit.t)
-//                 {
-//                     closest_hit = current_hit;
-//                 }
-//             }
-
-//             // Check intersection with all cylinders
-//             for (i = 0; i < data->scene->num_cylinders; i++)
-//             {
-//                 current_hit = cylinder_ray_collision(ray, data->scene->cylinders[i]);
-//                 if (current_hit.hit && current_hit.t < closest_hit.t)
-//                 {
-//                     closest_hit = current_hit;
-//                 }
-//             }
-
-//             // Set pixel color based on intersection
-//             if (closest_hit.hit)
-//             {
-//                 // Calculate view direction (from hit point to camera)
-//                 view_dir = vec_sub(data->scene->camera.position, closest_hit.point);
-//                 normalize_vec(&view_dir);
-
-//                 // Calculate lighting
-//                 lit_color = calculate_lighting(closest_hit, data->scene, view_dir);
-//                 pixel_color = rgb_to_uint32(lit_color);
-//             }
-//             else
-//             {
-//                 // Background color (black)
-//                 pixel_color = rgb_to_uint32((t_rgb){0, 0, 0});
-//             }
-
-//             mlx_put_pixel(data->window.image, x, y, pixel_color);
-//             x++;
-//         }
-//         y++;
-//     }
-//     printf("Rendering complete.\n");
-// }
+void	gpr_cont(t_gpr *gpr, int x, int y, t_scene *scene)
+{
+	normalize_vec(&gpr->cam_right);
+	// Calculate up vector from right and forward
+	gpr->cam_up = cross_product(gpr->cam_right, gpr->cam_forward);
+	normalize_vec(&gpr->cam_up);
+	// --- Ray Direction Calculation ---
+	// Convert pixel coordinates to NDC space (-1 to 1)
+	gpr->ndc_x = (2.0 * ((double)x + 0.5) / *scene->width_pixels - 1.0);
+	gpr->ndc_y = (1.0 - 2.0 * ((double)y + 0.5) / *scene->height_pixels);
+	// Apply FOV scaling and aspect ratio correction
+	gpr->screen_x = gpr->ndc_x * gpr->aspect_ratio * gpr->fov_scale;
+	gpr->screen_y = gpr->ndc_y * gpr->fov_scale;
+	// Calculate final direction vector
+	gpr->direction = gpr->cam_forward;  // Start with forward direction
+	gpr->direction = vec_add(gpr->direction, vec_mult_scalar(gpr->cam_right, gpr->screen_x));
+	gpr->direction = vec_add(gpr->direction, vec_mult_scalar(gpr->cam_up, gpr->screen_y));
+	normalize_vec(&gpr->direction);
+	// Set up ray
+	gpr->ray.origin = gpr->cam->position;
+	gpr->ray.direction = gpr->direction;
+	gpr->ray.t_min = RAY_T_MIN;
+	gpr->ray.t_max = RAY_T_MAX;
+}
 
 /**
  * @brief Generates a primary ray from the camera through a pixel.
@@ -136,78 +85,33 @@
  * @param window Contains image width and height.
  * @return t_ray The generated primary ray.
  */
-t_ray generate_primary_ray(int x, int y, t_scene *scene)
+t_ray	generate_primary_ray(int x, int y, t_scene *scene)
 {
-    t_ray ray;
-    t_camera *cam = &scene->camera;
-    double aspect_ratio = (double)*scene->width_pixels / (double)*scene->height_pixels;
+	t_gpr	gpr;
 
-    // Calculate field of view angle in radians
-    double fov_rad = cam->fov * (M_PI / 180.0);
-    double fov_scale = tan(fov_rad / 2.0);
-
-    // --- Camera Basis Vector Calculation ---
-    t_vector cam_forward = cam->orientation;
-    normalize_vec(&cam_forward);
-
-    // Calculate right vector using world up (0,1,0)
-    t_vector world_up = {0.0, 1.0, 0.0};
-    t_vector cam_right = cross_product(cam_forward, world_up);
-
-    // Handle the case where camera is looking straight up/down
-    if (vec_len2(cam_right) < EPSILON * EPSILON)
-    {
-        cam_right = (t_vector){1.0, 0.0, 0.0};
-    }
-    normalize_vec(&cam_right);
-
-    // Calculate up vector from right and forward
-    t_vector cam_up = cross_product(cam_right, cam_forward);
-    normalize_vec(&cam_up);
-
-    // --- Ray Direction Calculation ---
-    // Convert pixel coordinates to NDC space (-1 to 1)
-    double ndc_x = (2.0 * ((double)x + 0.5) / *scene->width_pixels - 1.0);
-    double ndc_y = (1.0 - 2.0 * ((double)y + 0.5) / *scene->height_pixels);
-
-    // Apply FOV scaling and aspect ratio correction
-    double screen_x = ndc_x * aspect_ratio * fov_scale;
-    double screen_y = ndc_y * fov_scale;
-
-    // Calculate final direction vector
-    t_vector direction = cam_forward;  // Start with forward direction
-    direction = vec_add(direction, vec_mult_scalar(cam_right, screen_x));
-    direction = vec_add(direction, vec_mult_scalar(cam_up, screen_y));
-
-    normalize_vec(&direction);
-
-    // Set up ray
-    ray.origin = cam->position;
-    ray.direction = direction;
-    ray.t_min = RAY_T_MIN;
-    ray.t_max = RAY_T_MAX;
-
-    return ray;
+	gpr.cam = &scene->camera;
+	gpr.aspect_ratio = (double)*scene->width_pixels / (double)*scene->height_pixels;
+	// Calculate field of view angle in radians
+	gpr.fov_rad = gpr.cam->fov * (M_PI / 180.0);
+	gpr.fov_scale = tan(gpr.fov_rad / 2.0);
+	// --- Camera Basis Vector Calculation ---
+	gpr.cam_forward = gpr.cam->orientation;
+	normalize_vec(&gpr.cam_forward);
+	// Calculate right vector using world up (0,1,0)
+	gpr.world_up.x = 0.0;
+	gpr.world_up.y = 1.0;
+	gpr.world_up.z = 0.0;
+	gpr.cam_right = cross_product(gpr.cam_forward, gpr.world_up);
+	// Handle the case where camera is looking straight up/down
+	if (vec_len2(gpr.cam_right) < EPSILON * EPSILON)
+	{
+		gpr.cam_right.x = 1.0;
+		gpr.cam_right.y = 0.0;
+		gpr.cam_right.z = 0.0;
+	}
+	gpr_cont(&gpr, x, y, scene);
+	return gpr.ray;
 }
-//=======
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/05 13:30:08 by smelicha          #+#    #+#             */
-/*   Updated: 2025/04/14 14:49:12 by smelicha         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../incl/minirt.h"
-#include <stdint.h>
-
-#define R_SHIFT 24
-#define G_SHIFT 16
-#define B_SHIFT 8
 
 static uint32_t	rgb_to_int(t_rgb color)
 {
@@ -251,10 +155,7 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 	{
 		current_hit = plane_ray_collision(ray, scene->planes[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
-		{
-			// printf("plane was hit\n");
 			closest_hit = current_hit;
-		}
 		i++;
 	}
 	i = 0;
@@ -262,10 +163,7 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 	{
 		current_hit = sphere_ray_collision(ray, scene->spheres[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
-		{
-			// printf("sphere was hit\n");
 			closest_hit = current_hit;
-		}
 		i++;
 	}
 	i = 0;
@@ -273,10 +171,7 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 	{
 		current_hit = cylinder_ray_collision(ray, scene->cylinders[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
-		{
-			// printf("cylinder was hit\n");
 			closest_hit = current_hit;
-		}
 		i++;
 	}
 	i = 0;
@@ -286,7 +181,6 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		// Calculate view direction (from hit point to camera)
 		view_dir = vec_sub(scene->camera.position, closest_hit.point);
 		normalize_vec(&view_dir);
-
 		// Calculate lighting
 		pixel_value = calculate_lighting(closest_hit, scene, view_dir);
 	}
