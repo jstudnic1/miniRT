@@ -10,7 +10,7 @@ L -5,5,-2 0.5 255,255,255
 L 5,5,2 0.7 255,255,255
 
 # Sphere: center at (0, 0, -5), radius 2, color red
-sp -3,10,-15 8 255,0,0
+sp 0,0,0 8 255,0,0
 
 # Sphere: center at (0, 0, -5), radius 2, color red
 sp -4,8,-10 4 255,130,0

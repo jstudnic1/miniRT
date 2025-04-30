@@ -324,16 +324,17 @@ int	render(t_data *data)
 	}
 	else if (data->rendering == render_run)
 	{
-		while (x < data->window.width)
+		while (y < data->window.height)
 		{
-			color = get_pixel_val(x, y, data->scene);
-			mlx_put_pixel(data->window.image, x, y, rgb_to_int(color));
-			x++;
-		}
-		x = 0;
+			while (x < data->window.width)
+			{
+				color = get_pixel_val(x, y, data->scene);
+				mlx_put_pixel(data->window.image, x, y, rgb_to_int(color));
+				x++;
+			}
+			x = 0;
 			y++;
-		if (y < data->window.height)
-			return (1);
+		}
 		data->rendering = render_finished;
 	}
 	return (0);

@@ -70,7 +70,7 @@ int	parse_cylinder(char *line, t_scene *scene)
 	}
 	cylinder.center = parse_vector(tokens[1]);
 	cylinder.axis = parse_vector(tokens[2]);
-	cylinder.diameter = ft_atof(tokens[3]);
+	cylinder.diameter = ft_atof(tokens[3]) / 2;
 	cylinder.height = ft_atof(tokens[4]);
 	cylinder.color = parse_color(tokens[5]);
 	ft_free_split(tokens); // Removed - managed by caller
@@ -120,7 +120,7 @@ int parse_sphere(char *line, t_scene *scene)
 		return (0);
 	}
 	sphere.center = parse_vector(tokens[1]);
-	sphere.radius = ft_atof(tokens[2]);
+	sphere.radius = ft_atof(tokens[2]) / 2;
 	sphere.color = parse_color(tokens[3]);
 	ft_free_split(tokens);
 	// Add validation for radius (must be positive)
