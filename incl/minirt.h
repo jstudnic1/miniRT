@@ -157,4 +157,47 @@ int			str_comp(const char *str1, const char *str2);
 void		print_scene(t_scene *scene);
 void		print_vector(const char *vec_name, t_vector *vector);
 
+// Structure to hold quadratic equation results for intersections
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	sqrt_discriminant;
+	double	t1;
+	double	t2;
+	double	t;
+} t_quadratic;
+
+// Holds data for cylinder intersection calculations
+typedef struct s_cyl_calc
+{
+	t_vector	oc;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	t0;
+	double	t1;
+	double	m0;
+	double	m1;
+	t_vector	p0;
+	t_vector	p1;
+	t_vector	normal;
+}	t_cyl_calc;
+
+// Structure to pass data between cylinder intersection helpers
+typedef struct s_cyl_hit_params
+{
+	t_ray			ray;
+	t_cylinder	cylinder;
+	t_collision	*closest_hit;
+	t_quadratic	*q;
+	t_vector	*oc;
+}	t_cyl_hit_params;
+
+// Typedefs for function pointers if needed (example)
+// typedef double (*t_intersect_func)(const t_ray *, const void *, double);
+
 #endif

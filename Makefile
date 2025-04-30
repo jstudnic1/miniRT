@@ -30,7 +30,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 MLX42 = ./MLX42/build/libmlx42.a
 MLX42_BUILD_DIR = ./MLX42/build
-CINCL = -Iinclude -ldl -lglfw -pthread -lm
+CINCL = -Iinclude -L/opt/homebrew/lib -ldl -lglfw -pthread -lm
 
 all: $(NAME)
 
@@ -58,4 +58,4 @@ mlx_re: mlx_clean mlx
 test: all
 	./$(NAME)
 
-.PHONY: all clean fclean re test 
+.PHONY: all clean fclean re test
