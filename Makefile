@@ -12,6 +12,7 @@ SRCS = 	main.c \
        	src/render/intersect_plane.c \
        	src/render/intersect_sphere.c \
        	src/render/intersect_cylinder.c \
+       	src/render/render_utils.c \
        	src/render/render.c \
        	src/render/lighting.c \
        	src/utils/ft_split.c \

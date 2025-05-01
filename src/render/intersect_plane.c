@@ -12,25 +12,14 @@
 
 #include "../../incl/minirt.h"
 
-// Helper function to calculate a point along a ray
-static t_vector	raypoint(t_ray ray, double t)
+static void	update_plane_hit(
+	t_collision *data, double t, t_ray ray, t_plane plane)
 {
-	t_vector	point;
-
-	point = vec_add(ray.origin, vec_mult_scalar(ray.direction, t));
-	return (point);
-}
-
-static t_collision	init_collision(void)
-{
-	t_collision	collision_data;
-
-	collision_data.hit = false;
-	collision_data.t = INFINITY;
-	collision_data.normal = (t_vector){0, 0, 0};
-	collision_data.point = (t_vector){0, 0, 0};
-	collision_data.color = (t_rgb){0, 0, 0};
-	return (collision_data);
+	data->hit = true;
+	data->t = t;
+	data->point = vec_add(ray.origin, vec_mult_scalar(ray.direction, t));
+	data->normal = plane.normal;
+	data->color = plane.color;
 }
 
 t_collision	plane_ray_collision(t_ray ray, t_plane plane)
@@ -41,7 +30,11 @@ t_collision	plane_ray_collision(t_ray ray, t_plane plane)
 	double		t;
 	t_vector	p0_minus_ray_origin;
 
-	collision_data = init_collision();
+	collision_data.hit = false;
+	collision_data.t = INFINITY;
+	collision_data.normal = (t_vector){0, 0, 0};
+	collision_data.point = (t_vector){0, 0, 0};
+	collision_data.color = (t_rgb){0, 0, 0};
 	denominator = dot_product(ray.direction, plane.normal);
 	if (fabs(denominator) < EPSILON)
 		return (collision_data);
@@ -50,11 +43,7 @@ t_collision	plane_ray_collision(t_ray ray, t_plane plane)
 	t = numerator / denominator;
 	if (t > RAY_T_MIN && t < RAY_T_MAX)
 	{
-		collision_data.hit = true;
-		collision_data.t = t;
-		collision_data.point = raypoint(ray, t);
-		collision_data.normal = plane.normal;
-		collision_data.color = plane.color;
+		update_plane_hit(&collision_data, t, ray, plane);
 	}
 	return (collision_data);
 }

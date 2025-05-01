@@ -13,26 +13,6 @@
 #include "../../incl/minirt.h"
 #include <math.h> // For sqrt()
 
-static t_vector	raypoint(t_ray ray, double t)
-{
-	t_vector	point;
-
-	point = vec_add(ray.origin, vec_mult_scalar(ray.direction, t));
-	return (point);
-}
-
-static t_collision	init_collision(void)
-{
-	t_collision	collision_data;
-
-	collision_data.hit = false;
-	collision_data.t = INFINITY;
-	collision_data.normal = (t_vector){0, 0, 0};
-	collision_data.point = (t_vector){0, 0, 0};
-	collision_data.color = (t_rgb){0, 0, 0};
-	return (collision_data);
-}
-
 static void	calculate_cylinder_quadratic(t_cyl_hit_params *params)
 {
 	*(params->oc) = vec_sub(params->ray.origin, params->cylinder.center);
@@ -46,16 +26,6 @@ static void	calculate_cylinder_quadratic(t_cyl_hit_params *params)
 		- pow(params->cylinder.diameter / 2.0, 2);
 	params->q->discriminant = params->q->b * params->q->b
 		- 4 * params->q->a * params->q->c;
-}
-
-static bool	solve_quadratic(t_quadratic *q)
-{
-	if (fabs(q->a) < EPSILON || q->discriminant < 0)
-		return (false);
-	q->sqrt_discriminant = sqrt(q->discriminant);
-	q->t0 = (-q->b - q->sqrt_discriminant) / (2.0 * q->a);
-	q->t1 = (-q->b + q->sqrt_discriminant) / (2.0 * q->a);
-	return (true);
 }
 
 // Placeholder function
@@ -112,7 +82,7 @@ t_collision	cylinder_ray_collision(t_ray ray, t_cylinder cylinder)
 	params.oc = &oc;
 	closest_hit = init_collision();
 	calculate_cylinder_quadratic(&params);
-	if (!solve_quadratic(&q))
+	if (!solve_quadratic(params.q))
 	{
 		check_caps(&params);
 		return (closest_hit);

@@ -157,6 +157,11 @@ int			str_comp(const char *str1, const char *str2);
 void		print_scene(t_scene *scene);
 void		print_vector(const char *vec_name, t_vector *vector);
 
+/* RENDER UTILS */
+t_vector	raypoint(t_ray ray, double t);
+t_collision	init_collision(void);
+bool	solve_quadratic(t_quadratic *q);
+
 // Structure to hold quadratic equation results for intersections
 typedef struct s_quadratic
 {
@@ -165,6 +170,7 @@ typedef struct s_quadratic
 	double	c;
 	double	discriminant;
 	double	sqrt_discriminant;
+	double	t0;
 	double	t1;
 	double	t2;
 	double	t;
