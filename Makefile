@@ -7,7 +7,6 @@ SRCS = 	main.c \
        	src/render/vectors.c \
        	src/render/vectors_utils.c \
        	src/render/ray.c \
-       	src/render/ray_utils.c \
        	src/render/color.c \
        	src/render/intersect_plane.c \
        	src/render/intersect_sphere.c \

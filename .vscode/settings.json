@@ -1,3 +1,4 @@
 {
+	"editor.defaultFormatter": "keyhr.42-c-format",
 	"cmake.sourceDirectory": "/Users/jakubstudnicka/Downloads/42/MiniRT_now/MLX42"
 }

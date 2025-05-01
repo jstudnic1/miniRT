@@ -17,11 +17,11 @@ t_rgb	calculate_ambient(t_ambient ambient, t_rgb surface_color)
 	t_rgb	ambient_color;
 
 	ambient_color.r = (int)(ambient.intensity * ambient.color.r
-		* surface_color.r / 255.0);
+			* surface_color.r / 255.0);
 	ambient_color.g = (int)(ambient.intensity * ambient.color.g
-		* surface_color.g / 255.0);
+			* surface_color.g / 255.0);
 	ambient_color.b = (int)(ambient.intensity * ambient.color.b
-		* surface_color.b / 255.0);
+			* surface_color.b / 255.0);
 	return (ambient_color);
 }
 
@@ -35,11 +35,11 @@ t_rgb	calculate_diffuse(t_light light, t_vector light_dir, t_vector normal,
 	if (diffuse_factor < 0)
 		diffuse_factor = 0;
 	diffuse_color.r = (int)(light.brightness * light.color.r
-		* surface_color.r * diffuse_factor / 255.0);
+			* surface_color.r * diffuse_factor / 255.0);
 	diffuse_color.g = (int)(light.brightness * light.color.g
-		* surface_color.g * diffuse_factor / 255.0);
+			* surface_color.g * diffuse_factor / 255.0);
 	diffuse_color.b = (int)(light.brightness * light.color.b
-		* surface_color.b * diffuse_factor / 255.0);
+			* surface_color.b * diffuse_factor / 255.0);
 	return (diffuse_color);
 }
 

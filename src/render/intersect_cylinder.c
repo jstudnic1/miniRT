@@ -19,8 +19,8 @@ static void	calculate_cylinder_quadratic(t_cyl_hit_params *params)
 	params->q->a = dot_product(params->ray.direction, params->ray.direction)
 		- pow(dot_product(params->ray.direction, params->cylinder.axis), 2);
 	params->q->b = 2.0 * (dot_product(params->ray.direction, *(params->oc))
-		- dot_product(params->ray.direction, params->cylinder.axis)
-		* dot_product(*(params->oc), params->cylinder.axis));
+			- dot_product(params->ray.direction, params->cylinder.axis)
+			* dot_product(*(params->oc), params->cylinder.axis));
 	params->q->c = dot_product(*(params->oc), *(params->oc))
 		- pow(dot_product(*(params->oc), params->cylinder.axis), 2)
 		- pow(params->cylinder.diameter / 2.0, 2);
@@ -55,7 +55,7 @@ static void	check_single_side_hit(double t, t_cyl_hit_params *params)
 		normal_at_hit = vec_sub(normal_at_hit,
 				vec_mult_scalar(params->cylinder.axis,
 					dot_product(vec_sub(p, params->cylinder.center),
-									params->cylinder.axis)));
+						params->cylinder.axis)));
 		params->closest_hit->normal = vec_normalize(normal_at_hit);
 		params->closest_hit->color = params->cylinder.color;
 	}
@@ -70,9 +70,9 @@ static void	process_cylinder_hits(t_cyl_hit_params *params)
 
 t_collision	cylinder_ray_collision(t_ray ray, t_cylinder cylinder)
 {
-	t_collision		closest_hit;
-	t_quadratic		q;
-	t_vector		oc;
+	t_collision			closest_hit;
+	t_quadratic			q;
+	t_vector			oc;
 	t_cyl_hit_params	params;
 
 	params.ray = ray;
