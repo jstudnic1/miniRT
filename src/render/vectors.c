@@ -24,17 +24,18 @@
  * @param vector The vector to normalize.
  * @return double The original length of the vector.
  */
-double	normalize_vec(t_vector *vector)
+t_vector	vec_normalize(t_vector vector)
 {
 	double	len;
+	t_vector normalized_vector;
 
-	len = vec_len(*vector);
+	len = vec_len(vector);
 	if (len == 0.0) // Avoid division by zero for zero vectors
-		return (0.0);
-	vector->x /= len;
-	vector->y /= len;
-	vector->z /= len;
-	return (len);
+		return (vector); // Return original zero vector
+	normalized_vector.x = vector.x / len;
+	normalized_vector.y = vector.y / len;
+	normalized_vector.z = vector.z / len;
+	return (normalized_vector);
 }
 
 /**

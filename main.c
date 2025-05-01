@@ -46,7 +46,7 @@ int	scene_init(t_data *data, char *filename)
 	}
 	printf("Scene parsing successful.\n");
 	// Normalize camera orientation vector ONCE here
-	normalize_vec(&data->scene->camera.orientation);
+	data->scene->camera.orientation = vec_normalize(data->scene->camera.orientation);
 	data->scene->width_pixels = &data->window.width;
 	data->scene->height_pixels = &data->window.height;
 	return (0);

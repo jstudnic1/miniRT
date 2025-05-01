@@ -60,7 +60,7 @@ t_rgb calculate_lighting(t_collision hit, t_scene *scene, t_vector view_dir)
     {
         // Calculate light direction (from hit point to light)
         light_dir = vec_sub(scene->lights[i].position, hit.point);
-        normalize_vec(&light_dir);
+        light_dir = vec_normalize(light_dir);
 
         // Debug print for key points - limit to 5 outputs to prevent flooding
         if (debug_count < 5) {

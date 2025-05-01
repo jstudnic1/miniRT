@@ -94,7 +94,7 @@
 //             {
 //                 // Calculate view direction (from hit point to camera)
 //                 view_dir = vec_sub(data->scene->camera.position, closest_hit.point);
-//                 normalize_vec(&view_dir);
+//                 view_dir = vec_normalize(view_dir);
 
 //                 // Calculate lighting
 //                 lit_color = calculate_lighting(closest_hit, data->scene, view_dir);
@@ -148,7 +148,7 @@ t_ray generate_primary_ray(int x, int y, t_scene *scene)
 
     // --- Camera Basis Vector Calculation ---
     t_vector cam_forward = cam->orientation;
-    normalize_vec(&cam_forward);
+    cam_forward = vec_normalize(cam_forward);
 
     // Calculate right vector using world up (0,1,0)
     t_vector world_up = {0.0, 1.0, 0.0};
@@ -159,11 +159,11 @@ t_ray generate_primary_ray(int x, int y, t_scene *scene)
     {
         cam_right = (t_vector){1.0, 0.0, 0.0};
     }
-    normalize_vec(&cam_right);
+    cam_right = vec_normalize(cam_right);
 
     // Calculate up vector from right and forward
     t_vector cam_up = cross_product(cam_right, cam_forward);
-    normalize_vec(&cam_up);
+    cam_up = vec_normalize(cam_up);
 
     // --- Ray Direction Calculation ---
     // Convert pixel coordinates to NDC space (-1 to 1)
@@ -179,7 +179,7 @@ t_ray generate_primary_ray(int x, int y, t_scene *scene)
     direction = vec_add(direction, vec_mult_scalar(cam_right, screen_x));
     direction = vec_add(direction, vec_mult_scalar(cam_up, screen_y));
 
-    normalize_vec(&direction);
+    direction = vec_normalize(direction);
 
     // Set up ray
     ray.origin = cam->position;
@@ -224,16 +224,16 @@ static uint32_t	rgb_to_int(t_rgb color)
 /**
  * @brief Creates ray from camera through the pixel in a view plane,
  checks if it hits object and returns value of the pixel
- * 
- * @param x 
- * @param y 
- * @param scene 
- * @return t_rgb 
+ *
+ * @param x
+ * @param y
+ * @param scene
+ * @return t_rgb
  */
 static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 {
-	t_rgb	pixel_value;
-	t_ray	ray;
+	t_rgb		pixel_value;
+	t_ray		ray;
 	t_collision	closest_hit;
 	t_collision	current_hit;
 	t_vector	view_dir;
@@ -252,7 +252,6 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		current_hit = plane_ray_collision(ray, scene->planes[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
 		{
-			// printf("plane was hit\n");
 			closest_hit = current_hit;
 		}
 		i++;
@@ -263,7 +262,6 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		current_hit = sphere_ray_collision(ray, scene->spheres[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
 		{
-			// printf("sphere was hit\n");
 			closest_hit = current_hit;
 		}
 		i++;
@@ -274,27 +272,15 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		current_hit = cylinder_ray_collision(ray, scene->cylinders[i]);
 		if (current_hit.hit && current_hit.t < closest_hit.t)
 		{
-			// printf("cylinder was hit\n");
 			closest_hit = current_hit;
 		}
 		i++;
 	}
-	i = 0;
-	// Set pixel color based on intersection
 	if (closest_hit.hit)
 	{
-		// Calculate view direction (from hit point to camera)
 		view_dir = vec_sub(scene->camera.position, closest_hit.point);
-		normalize_vec(&view_dir);
-
-		// Calculate lighting
+		view_dir = vec_normalize(view_dir);
 		pixel_value = calculate_lighting(closest_hit, scene, view_dir);
-	}
-	else
-	{
-		pixel_value.r = 0;
-		pixel_value.g = 0;
-		pixel_value.b = 0;
 	}
 	return (pixel_value);
 }
@@ -304,9 +290,9 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
  * @brief Takes scene and its objects, casts rays and puts pixel values
  to the mlx image, checks if the resolution changed and recomputes the image
  if true
- * 
- * @param data 
- * @return int 
+ *
+ * @param data
+ * @return int
  */
 int	render(t_data *data)
 {

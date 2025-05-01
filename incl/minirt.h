@@ -102,7 +102,7 @@ double		vec_len2(t_vector vector);
 t_vector	create_vector(double x, double y, double z);
 
 /* VECTORS */
-double		normalize_vec(t_vector *vector);
+t_vector	vec_normalize(t_vector vector);
 t_vector	vec_add(t_vector u, t_vector v);
 t_vector	vec_sub(t_vector u, t_vector v);
 t_vector	vec_mult(t_vector u, t_vector v);
