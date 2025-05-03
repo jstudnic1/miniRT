@@ -45,8 +45,7 @@ int	scene_init(t_data *data, char *filename)
 		return (-1);
 	}
 	printf("Scene parsing successful.\n");
-	// Normalize camera orientation vector ONCE here
-	data->scene->camera.orientation = vec_normalize(data->scene->camera.orientation);
+	normalize_vec(&data->scene->camera.orientation);
 	data->scene->width_pixels = &data->window.width;
 	data->scene->height_pixels = &data->window.height;
 	return (0);
@@ -66,13 +65,12 @@ void	data_init(t_data *data)
 
 /**
  * @brief
- TODO check for returns of the functions like scene init which should validate the input file, perhaps make an "development check exception"
  *
  * @param argc
  * @param argv
  * @return int
  */
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 
