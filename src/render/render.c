@@ -159,11 +159,11 @@ static t_rgb	gpv_cont(t_gpv *gpv, t_scene *scene)
 /**
  * @brief Creates ray from camera through the pixel in a view plane,
  checks if it hits object and returns value of the pixel
- * 
- * @param x 
- * @param y 
- * @param scene 
- * @return t_rgb 
+ *
+ * @param x
+ * @param y
+ * @param scene
+ * @return t_rgb
  */
 static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 {
@@ -182,6 +182,7 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		if (gpv.current_hit.hit && gpv.current_hit.t < gpv.closest_hit.t)
 			gpv.closest_hit = gpv.current_hit;
 		gpv.i++;
+
 	}
 	gpv.i = 0;
 	while (gpv.i < scene->num_spheres)
@@ -216,9 +217,9 @@ void	render_loop(uint32_t *x, uint32_t *y, t_data *data)
  * @brief Takes scene and its objects, casts rays and puts pixel values
  to the mlx image, checks if the resolution changed and recomputes the image
  if true
- * 
- * @param data 
- * @return int 
+ *
+ * @param data
+ * @return int
  */
 int	render(t_data *data)
 {

@@ -13,10 +13,10 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-#include "color.h"
+# include "color.h"
 // #include <cstdint>
-#include <stdbool.h>
-#include <stdint.h>
+# include <stdbool.h>
+# include <stdint.h>
 
 typedef struct s_vector
 {
@@ -35,17 +35,17 @@ typedef struct s_ray
 
 typedef struct s_plane
 {
-	t_vector	point;     // A point on the plane
-	t_vector	normal;    // The normal vector to the plane
-	t_rgb		color;     // Color of the plane
-} t_plane;
+	t_vector	point;		// A point on the plane
+	t_vector	normal;		// The normal vector to the plane
+	t_rgb		color;		// Color of the plane
+}	t_plane;
 
 typedef struct s_sphere
 {
-	t_vector	center;    // Center point of the sphere
-	double		radius;    // Radius of the sphere
-	t_rgb		color;     // Color of the sphere
-} t_sphere;
+	t_vector	center;		// Center point of the sphere
+	double		radius;		// Radius of the sphere
+	t_rgb		color;		// Color of the sphere
+}	t_sphere;
 
 typedef struct s_camera
 {
