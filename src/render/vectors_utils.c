@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:16:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/04/06 11:13:57 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:39:15 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ t_vector	vec_mult_scalar(t_vector vec, double scalar)
  * @param vec The vector to check.
  * @return bool True if the vector is normalized, false otherwise.
  */
-bool is_normalized(t_vector vec)
+bool	is_normalized(t_vector vec)
 {
-	double len_sq = vec_len2(vec);
-	// Compare the squared length to 1.0 using EPSILON for tolerance
+	double	len_sq;
+
+	len_sq = vec_len2(vec);
 	return (fabs(len_sq - 1.0) < EPSILON);
 }

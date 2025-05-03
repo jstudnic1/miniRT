@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   scene_parser_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:00:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/04/06 11:14:15 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:11:24 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
+#include <unistd.h>
 
 int	double_array_length(char **array)
 {
@@ -33,55 +34,73 @@ int	double_array_length(char **array)
 void	init_scene(t_scene *scene)
 {
 	if (!scene)
-		return;
-	// Initialize counts
+		return ;
 	scene->num_lights = 0;
 	scene->num_planes = 0;
 	scene->num_spheres = 0;
 	scene->num_cylinders = 0;
-	// Initialize pointers (important if they are dynamically allocated later)
 	scene->lights = NULL;
 	scene->planes = NULL;
 	scene->spheres = NULL;
 	scene->cylinders = NULL;
-	// Initialize mandatory elements flags
 	scene->ambient_parsed = false;
 	scene->camera_parsed = false;
-	// Initialize mandatory elements to identifiable invalid states
-	scene->ambient.intensity = -1.0; // Indicate not set yet
-	scene->camera.fov = -1.0;       // Indicate not set yet
+	scene->ambient.intensity = -1.0;
+	scene->camera.fov = -1.0;
 }
 
 // Placeholder for free_scene - ensure it frees allocated arrays
 void	free_scene(t_scene *scene)
 {
 	if (!scene)
-		return;
+		return ;
 	free(scene->lights);
 	free(scene->planes);
-	free(scene->spheres);    // Free spheres array
+	free(scene->spheres);
 	free(scene->cylinders);
-	// Do NOT free the scene pointer itself here, caller allocated it.
-	// Only free the internal arrays.
 }
 
-// Placeholder for add_light (assuming dynamic array)
-// Needs reallocation logic (e.g., realloc)
+void	*ft_realloc(void *old_ptr, size_t new_size, size_t old_size)
+{
+	char	*new_ptr;
+	char	*tmp;
+	size_t	i;
+
+	new_ptr = NULL;
+	tmp = old_ptr;
+	i = 0;
+	if (old_ptr == NULL && old_size == 0)
+	{
+		new_ptr = malloc(new_size);
+		return ((void *)new_ptr);
+	}
+	else if ((old_ptr == NULL && old_size != 0))
+		return (NULL);
+	else if (old_ptr && new_size == 0)
+	{
+		free(old_ptr);
+		return (NULL);
+	}
+	new_ptr = malloc(new_size);
+	while (i < old_size)
+	{
+		new_ptr[i] = tmp[i];
+		i++;
+	}
+	free(old_ptr);
+	return ((void *)new_ptr);
+}
+
 int	add_light(t_scene *scene, t_light light)
 {
-	// Simple implementation without dynamic resizing (for fixed array or testing)
-	// if (scene->num_lights < MAX_LIGHTS) { // If using fixed array
-	//     scene->lights[scene->num_lights] = light;
-	//     scene->num_lights++;
-	//     return (1);
-	// }
-	// return (0); // Failed to add
+	t_light	*new_lights;
 
-	// Basic dynamic array implementation (example)
-	t_light *new_lights = realloc(scene->lights, (scene->num_lights + 1) * sizeof(t_light));
-	if (!new_lights) {
+	new_lights = ft_realloc(scene->lights,
+			(scene->num_lights + 1) * sizeof(t_light), scene->num_lights * sizeof(t_light));
+	if (!new_lights)
+	{
 		perror("Failed to realloc lights array");
-		return (0); // Allocation failed
+		return (0);
 	}
 	scene->lights = new_lights;
 	scene->lights[scene->num_lights] = light;
@@ -89,11 +108,14 @@ int	add_light(t_scene *scene, t_light light)
 	return (1);
 }
 
-// Placeholder for add_plane (assuming dynamic array)
 int	add_plane(t_scene *scene, t_plane plane)
 {
-	t_plane *new_planes = realloc(scene->planes, (scene->num_planes + 1) * sizeof(t_plane));
-	if (!new_planes) {
+	t_plane	*new_planes;
+
+	new_planes = ft_realloc(scene->planes,
+			(scene->num_planes + 1) * sizeof(t_plane), scene->num_planes * sizeof(t_plane));
+	if (!new_planes)
+	{
 		perror("Failed to realloc planes array");
 		return (0);
 	}
@@ -103,11 +125,14 @@ int	add_plane(t_scene *scene, t_plane plane)
 	return (1);
 }
 
-// Add sphere to the dynamic array in the scene
-int add_sphere(t_scene *scene, t_sphere sphere)
+int	add_sphere(t_scene *scene, t_sphere sphere)
 {
-	t_sphere *new_spheres = realloc(scene->spheres, (scene->num_spheres + 1) * sizeof(t_sphere));
-	if (!new_spheres) {
+	t_sphere	*new_spheres;
+
+	new_spheres = ft_realloc(scene->spheres,
+			(scene->num_spheres + 1) * sizeof(t_sphere), scene->num_spheres * sizeof(t_sphere));
+	if (!new_spheres)
+	{
 		perror("Failed to realloc spheres array");
 		return (0);
 	}
@@ -117,11 +142,14 @@ int add_sphere(t_scene *scene, t_sphere sphere)
 	return (1);
 }
 
-// Placeholder for add_cylinder (assuming dynamic array)
 int	add_cylinder(t_scene *scene, t_cylinder cylinder)
 {
-	t_cylinder *new_cylinders = realloc(scene->cylinders, (scene->num_cylinders + 1) * sizeof(t_cylinder));
-	if (!new_cylinders) {
+	t_cylinder	*new_cylinders;
+
+	new_cylinders = ft_realloc(scene->cylinders,
+			(scene->num_cylinders + 1) * sizeof(t_cylinder), scene->num_cylinders * sizeof(t_cylinder));
+	if (!new_cylinders)
+	{
 		perror("Failed to realloc cylinders array");
 		return (0);
 	}
@@ -133,13 +161,10 @@ int	add_cylinder(t_scene *scene, t_cylinder cylinder)
 
 int	validate_scene(t_scene *scene)
 {
-	// This function might be redundant now if parsing functions do all checks,
-	// or it could double-check for mandatory elements.
 	if (!scene || scene->ambient.intensity < 0.0 || scene->camera.fov <= 0)
 	{
 		fprintf(stderr, "Error: Scene validation failed (Missing A or C?).\n");
-		return (-1); // Indicate failure
+		return (-1);
 	}
-	// Add more checks if needed
-	return (0); // Indicate success
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <studnicka.jakub04@gmail.com>     +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:16:26 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/04/06 10:32:03 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:42:50 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
  * @brief Normalizes a vector (makes its length 1) and returns its original
  * length.
  * Usage in MiniRT:
- * - Normalizing ray direction vectors after calculating them (e.g., from camera).
- * - Normalizing surface normal vectors at intersection points for lighting calcs.
+ * - Normalizing ray direction vectors after calculating them
+ *   (e.g., from camera).
+ * - Normalizing surface normal vectors at intersection points for
+ *   lighting calcs.
  * - Normalizing the light vector (from intersection point to light source).
  * - Normalizing the view vector (from intersection point to camera).
  *
@@ -26,12 +28,12 @@
  */
 t_vector	vec_normalize(t_vector vector)
 {
-	double	len;
-	t_vector normalized_vector;
+	double		len;
+	t_vector	normalized_vector;
 
 	len = vec_len(vector);
-	if (len == 0.0) // Avoid division by zero for zero vectors
-		return (vector); // Return original zero vector
+	if (len == 0.0)
+		return (vector);
 	normalized_vector.x = vector.x / len;
 	normalized_vector.y = vector.y / len;
 	normalized_vector.z = vector.z / len;
@@ -41,9 +43,11 @@ t_vector	vec_normalize(t_vector vector)
 /**
  * @brief Adds two vectors component-wise (u + v).
  * Usage in MiniRT:
- * - Calculating a point along a ray: P = Origin + t * Direction (requires scalar mult first).
+ * - Calculating a point along a ray:
+ *   P = Origin + t * Direction (requires scalar mult first).
  * - Translating points or origins.
- * - Combining color contributions from different lights or components (ambient + diffuse + specular).
+ * - Combining color contributions from different lights or components
+ *   (ambient + diffuse + specular).
  *
  * @param u The first vector.
  * @param v The second vector.
@@ -62,7 +66,8 @@ t_vector	vec_add(t_vector u, t_vector v)
 /**
  * @brief Subtracts vector v from vector u component-wise (u - v).
  * Usage in MiniRT:
- * - Finding the direction vector between two points: Direction = TargetPoint - OriginPoint.
+ * - Finding the direction vector between two points:
+ *   Direction = TargetPoint - OriginPoint.
  * - Calculating the light vector: L = LightPosition - IntersectionPoint.
  * - Calculating the view vector: V = CameraPosition - IntersectionPoint.
  * - Used in intersection tests (e.g., ray origin relative to object center).
@@ -87,8 +92,10 @@ t_vector	vec_sub(t_vector u, t_vector v)
  * - Color blending: FinalColor.r = SurfaceColor.r * LightColor.r.
  * - Modulating light intensity by surface color in diffuse/specular terms.
  *
- * NOTE: This is NOT the dot product (scalar result) or cross product (vector result).
- * NOTE: To scale a vector by a scalar 's', use vec_scale(vector, s) (needs implementation) or vec_mult(vector, create_vector(s, s, s)).
+ * NOTE: This is NOT the dot product (scalar result) or cross product
+ *       (vector result).
+ * NOTE: To scale a vector by a scalar 's', use vec_scale(vector, s)
+ *       (needs implementation) or vec_mult(vector, create_vector(s, s, s)).
  *
  * @param u The first vector.
  * @param v The second vector.
@@ -108,9 +115,11 @@ t_vector	vec_mult(t_vector u, t_vector v)
  * @brief Divides vector u by vector v component-wise (u / v).
  * Usage in MiniRT:
  * - Less common in basic ray tracing.
- * - Potentially used in advanced techniques or specific color space conversions.
+ * - Potentially used in advanced techniques or specific color
+ *   space conversions.
  *
- * NOTE: Potential division by zero if any component of v is zero. Needs careful handling.
+ * NOTE: Potential division by zero if any component of v is zero.
+ *       Needs careful handling.
  *
  * @param u The dividend vector.
  * @param v The divisor vector.
@@ -120,13 +129,8 @@ t_vector	vec_div(t_vector u, t_vector v)
 {
 	t_vector	div;
 
-	// Basic check to avoid immediate division by zero, more robust handling might be needed
 	if (v.x == 0.0 || v.y == 0.0 || v.z == 0.0)
-	{
-		// Handle error: return a default vector, print error, or use specific logic
-		// Returning a zero vector for now as a placeholder
 		return (create_vector(0.0, 0.0, 0.0));
-	}
 	div.x = u.x / v.x;
 	div.y = u.y / v.y;
 	div.z = u.z / v.z;

@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 13:30:08 by smelicha          #+#    #+#             */
-/*   Updated: 2025/05/03 13:34:59 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:37:17 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ static t_rgb	get_pixel_val(int x, int y, t_scene *scene)
 		if (gpv.current_hit.hit && gpv.current_hit.t < gpv.closest_hit.t)
 			gpv.closest_hit = gpv.current_hit;
 		gpv.i++;
-
 	}
 	gpv.i = 0;
 	while (gpv.i < scene->num_spheres)

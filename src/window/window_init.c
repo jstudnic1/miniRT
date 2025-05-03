@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 13:31:25 by smelicha          #+#    #+#             */
-/*   Updated: 2025/04/13 13:39:52 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:24:37 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ void	exit_routine(t_window *window)
 	window->image = NULL;
 	mlx_close_window(window->mlx);
 	window->mlx = NULL;
+	if (window->data->scene->lights)
+		free(window->data->scene->lights);
+	if (window->data->scene->planes)
+		free(window->data->scene->planes);
+	if (window->data->scene->spheres)
+		free(window->data->scene->spheres);
+	if (window->data->scene->cylinders)
+		free(window->data->scene->cylinders);
+	if (window->data->scene)
+		free(window->data->scene);
 	return ;
 }
 
