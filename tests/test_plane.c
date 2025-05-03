@@ -16,9 +16,9 @@ int approx_equal(double a, double b) {
 void test_simple_hit() {
     printf("Running test_simple_hit... ");
     t_plane plane = { .point = {0, 0, 0}, .normal = {0, 1, 0} }; // Y=0 plane
-    normalize_vec(&plane.normal); // Ensure normal is normalized
+    vec_normalize(&plane.normal); // Ensure normal is normalized
     t_ray ray = { .origin = {0, 5, 0}, .direction = {0, -1, 0} }; // Ray straight down from Y=5
-    normalize_vec(&ray.direction); // Ensure direction is normalized
+    vec_normalize(&ray.direction); // Ensure direction is normalized
 
     t_collision result = plane_ray_collision(ray, plane);
 
@@ -36,9 +36,9 @@ void test_simple_hit() {
 void test_angled_hit() {
     printf("Running test_angled_hit... ");
     t_plane plane = { .point = {0, 0, 0}, .normal = {0, 1, 0} }; // Y=0 plane
-    normalize_vec(&plane.normal);
+    vec_normalize(&plane.normal);
     t_ray ray = { .origin = {0, 5, 0}, .direction = {1, -1, 0} }; // Ray down and right
-    normalize_vec(&ray.direction);
+    vec_normalize(&ray.direction);
 
     t_collision result = plane_ray_collision(ray, plane);
 
@@ -63,9 +63,9 @@ void test_angled_hit() {
 void test_parallel() {
     printf("Running test_parallel... ");
     t_plane plane = { .point = {0, 0, 0}, .normal = {0, 1, 0} }; // Y=0 plane
-    normalize_vec(&plane.normal);
+    vec_normalize(&plane.normal);
     t_ray ray = { .origin = {0, 5, 0}, .direction = {1, 0, 0} }; // Ray parallel along X axis
-    normalize_vec(&ray.direction);
+    vec_normalize(&ray.direction);
 
     t_collision result = plane_ray_collision(ray, plane);
 
@@ -76,9 +76,9 @@ void test_parallel() {
 void test_miss() {
     printf("Running test_miss... ");
     t_plane plane = { .point = {0, 0, 0}, .normal = {0, 1, 0} }; // Y=0 plane
-    normalize_vec(&plane.normal);
+    vec_normalize(&plane.normal);
     t_ray ray = { .origin = {0, 5, 0}, .direction = {0, 1, 0} }; // Ray pointing up away from plane
-    normalize_vec(&ray.direction);
+    vec_normalize(&ray.direction);
 
     t_collision result = plane_ray_collision(ray, plane);
 
@@ -89,9 +89,9 @@ void test_miss() {
 void test_behind_ray() {
     printf("Running test_behind_ray... ");
     t_plane plane = { .point = {0, 0, 0}, .normal = {0, 1, 0} }; // Y=0 plane
-    normalize_vec(&plane.normal);
+    vec_normalize(&plane.normal);
     t_ray ray = { .origin = {0, -5, 0}, .direction = {0, -1, 0} }; // Ray starting below, pointing down
-    normalize_vec(&ray.direction);
+    vec_normalize(&ray.direction);
 
     t_collision result = plane_ray_collision(ray, plane);
 
@@ -102,9 +102,9 @@ void test_behind_ray() {
 void test_hit_from_back() {
     printf("Running test_hit_from_back... ");
     t_plane plane = { .point = {0, 0, 0}, .normal = {0, 1, 0} }; // Y=0 plane
-    normalize_vec(&plane.normal);
+    vec_normalize(&plane.normal);
     t_ray ray = { .origin = {0, -5, 0}, .direction = {0, 1, 0} }; // Ray starting below, pointing up
-    normalize_vec(&ray.direction);
+    vec_normalize(&ray.direction);
 
     t_collision result = plane_ray_collision(ray, plane);
 

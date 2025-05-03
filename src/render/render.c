@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 13:30:08 by smelicha          #+#    #+#             */
-/*   Updated: 2025/05/03 11:57:37 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:34:59 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ typedef struct s_gpr
 
 void	gpr_cont(t_gpr *gpr, int x, int y, t_scene *scene)
 {
-	normalize_vec(&gpr->cam_right);
+	gpr->cam_right = vec_normalize(gpr->cam_right);
 	gpr->cam_up = cross_product(gpr->cam_right, gpr->cam_forward);
-	normalize_vec(&gpr->cam_up);
+	gpr->cam_up = vec_normalize(gpr->cam_up);
 	gpr->ndc_x = (2.0 * ((double)x + 0.5) / *scene->width_pixels - 1.0);
 	gpr->ndc_y = (1.0 - 2.0 * ((double)y + 0.5) / *scene->height_pixels);
 	gpr->screen_x = gpr->ndc_x * gpr->aspect_ratio * gpr->fov_scale;
@@ -51,7 +51,7 @@ void	gpr_cont(t_gpr *gpr, int x, int y, t_scene *scene)
 			vec_mult_scalar(gpr->cam_right, gpr->screen_x));
 	gpr->direction = vec_add(gpr->direction,
 			vec_mult_scalar(gpr->cam_up, gpr->screen_y));
-	normalize_vec(&gpr->direction);
+	gpr->direction = vec_normalize(gpr->direction);
 	gpr->ray.origin = gpr->cam->position;
 	gpr->ray.direction = gpr->direction;
 	gpr->ray.t_min = RAY_T_MIN;
@@ -91,7 +91,7 @@ t_ray	generate_primary_ray(int x, int y, t_scene *scene)
 	gpr.fov_rad = gpr.cam->fov * (M_PI / 180.0);
 	gpr.fov_scale = tan(gpr.fov_rad / 2.0);
 	gpr.cam_forward = gpr.cam->orientation;
-	normalize_vec(&gpr.cam_forward);
+	gpr.cam_forward = vec_normalize(gpr.cam_forward);
 	gpr.world_up.x = 0.0;
 	gpr.world_up.y = 1.0;
 	gpr.world_up.z = 0.0;
@@ -143,7 +143,7 @@ static t_rgb	gpv_cont(t_gpv *gpv, t_scene *scene)
 	if (gpv->closest_hit.hit)
 	{
 		gpv->view_dir = vec_sub(scene->camera.position, gpv->closest_hit.point);
-		normalize_vec(&gpv->view_dir);
+		gpv->view_dir = vec_normalize(gpv->view_dir);
 		gpv->pixel_value = calculate_lighting(gpv->closest_hit, scene,
 				gpv->view_dir);
 	}

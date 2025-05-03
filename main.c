@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:14:29 by smelicha          #+#    #+#             */
-/*   Updated: 2025/04/13 13:32:20 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:35:17 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	scene_init(t_data *data, char *filename)
 		return (-1);
 	}
 	printf("Scene parsing successful.\n");
-	normalize_vec(&data->scene->camera.orientation);
+	data->scene->camera.orientation = vec_normalize(data->scene->camera.orientation);
 	data->scene->width_pixels = &data->window.width;
 	data->scene->height_pixels = &data->window.height;
 	return (0);
