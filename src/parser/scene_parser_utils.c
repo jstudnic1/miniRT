@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:00:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/05/03 16:11:24 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:33:50 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,25 @@ void	free_scene(t_scene *scene)
 	free(scene->cylinders);
 }
 
+void	ft_calloc_mmcp(char *src, char *dst, size_t length)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < length)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+}
+
 void	*ft_realloc(void *old_ptr, size_t new_size, size_t old_size)
 {
 	char	*new_ptr;
 	char	*tmp;
-	size_t	i;
 
 	new_ptr = NULL;
 	tmp = old_ptr;
-	i = 0;
 	if (old_ptr == NULL && old_size == 0)
 	{
 		new_ptr = malloc(new_size);
@@ -82,11 +92,7 @@ void	*ft_realloc(void *old_ptr, size_t new_size, size_t old_size)
 		return (NULL);
 	}
 	new_ptr = malloc(new_size);
-	while (i < old_size)
-	{
-		new_ptr[i] = tmp[i];
-		i++;
-	}
+	ft_calloc_mmcp(tmp, new_ptr, old_size);
 	free(old_ptr);
 	return ((void *)new_ptr);
 }
@@ -96,7 +102,8 @@ int	add_light(t_scene *scene, t_light light)
 	t_light	*new_lights;
 
 	new_lights = ft_realloc(scene->lights,
-			(scene->num_lights + 1) * sizeof(t_light), scene->num_lights * sizeof(t_light));
+			(scene->num_lights + 1) * sizeof(t_light),
+			scene->num_lights * sizeof(t_light));
 	if (!new_lights)
 	{
 		perror("Failed to realloc lights array");
@@ -113,7 +120,8 @@ int	add_plane(t_scene *scene, t_plane plane)
 	t_plane	*new_planes;
 
 	new_planes = ft_realloc(scene->planes,
-			(scene->num_planes + 1) * sizeof(t_plane), scene->num_planes * sizeof(t_plane));
+			(scene->num_planes + 1) * sizeof(t_plane),
+			scene->num_planes * sizeof(t_plane));
 	if (!new_planes)
 	{
 		perror("Failed to realloc planes array");
@@ -130,7 +138,8 @@ int	add_sphere(t_scene *scene, t_sphere sphere)
 	t_sphere	*new_spheres;
 
 	new_spheres = ft_realloc(scene->spheres,
-			(scene->num_spheres + 1) * sizeof(t_sphere), scene->num_spheres * sizeof(t_sphere));
+			(scene->num_spheres + 1) * sizeof(t_sphere),
+			scene->num_spheres * sizeof(t_sphere));
 	if (!new_spheres)
 	{
 		perror("Failed to realloc spheres array");
@@ -147,7 +156,8 @@ int	add_cylinder(t_scene *scene, t_cylinder cylinder)
 	t_cylinder	*new_cylinders;
 
 	new_cylinders = ft_realloc(scene->cylinders,
-			(scene->num_cylinders + 1) * sizeof(t_cylinder), scene->num_cylinders * sizeof(t_cylinder));
+			(scene->num_cylinders + 1) * sizeof(t_cylinder),
+			scene->num_cylinders * sizeof(t_cylinder));
 	if (!new_cylinders)
 	{
 		perror("Failed to realloc cylinders array");

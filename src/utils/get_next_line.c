@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:48:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/03/14 16:18:51 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:00:57 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,29 @@ static char	*read_line(int fd, char *buffer, char *backup)
 	return (backup);
 }
 
+static char	*copy_backup_to_line(char **backup, int *i)
+{
+	char	*line;
+
+	line = NULL;
+	*i = 0;
+	while ((*backup)[*i] && (*backup)[*i] != '\n')
+		*i = *i + 1;
+	if ((*backup)[*i] == '\n')
+		*i = *i + 1;
+	line = malloc(sizeof(char) * (*i + 1));
+	if (!line)
+		return (NULL);
+	*i = 0;
+	while ((*backup)[*i] && (*backup)[*i] != '\n')
+	{
+		line[*i] = (*backup)[*i];
+		*i = *i + 1;
+	}
+	line[*i] = '\0';
+	return (line);
+}
+
 static char	*get_line_from_backup(char **backup)
 {
 	char	*line;
@@ -120,21 +143,7 @@ static char	*get_line_from_backup(char **backup)
 		*backup = NULL;
 		return (NULL);
 	}
-	i = 0;
-	while ((*backup)[i] && (*backup)[i] != '\n')
-		i++;
-	if ((*backup)[i] == '\n')
-		i++;
-	line = malloc(sizeof(char) * (i + 1));
-	if (!line)
-		return (NULL);
-	i = 0;
-	while ((*backup)[i] && (*backup)[i] != '\n')
-	{
-		line[i] = (*backup)[i];
-		i++;
-	}
-	line[i] = '\0';
+	line = copy_backup_to_line(backup, &i);
 	temp = *backup;
 	*backup = ft_strdup(&(*backup)[i + ((*backup)[i] == '\n')]);
 	free(temp);
@@ -158,4 +167,4 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = get_line_from_backup(&backup);
 	return (line);
-} 
+}

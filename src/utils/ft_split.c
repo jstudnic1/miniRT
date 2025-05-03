@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:42:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/03/14 16:04:44 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:55:22 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,4 @@ char	**ft_split(char const *s, char c)
 	}
 	result[j] = NULL;
 	return (result);
-} 
+}

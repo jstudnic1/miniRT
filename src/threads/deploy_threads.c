@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 19:51:28 by smelicha          #+#    #+#             */
-/*   Updated: 2025/04/14 14:43:07 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:45:54 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	create_mutexes(t_data *data)
 
 /**
  * @brief Dummy function that will be used as a template for the computation
- function
- TODO add internal state variable so the state mutex isn't locked during entire loop cycle
+ *        function
  * 
  * @param core 
  * @return void* 
@@ -127,7 +126,8 @@ int	deploy_threads(t_data *data)
 	init_cores_data(data);
 	while (i < N_THREADS)
 	{
-		pthread_create(&data->cores[i].tid, NULL, (void *)&dummy_function, &data->cores[i]);
+		pthread_create(&data->cores[i].tid, NULL,
+			(void *)&dummy_function, &data->cores[i]);
 		i++;
 	}
 	return (0);

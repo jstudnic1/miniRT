@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_atof.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jstudnic <jstudnic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:44:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/03/14 16:05:00 by jstudnic         ###   ########.fr       */
+/*   Updated: 2025/05/03 16:53:51 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,23 @@ int	ft_atoi(const char *str)
 	return (sign * result);
 }
 
+void	ft_atof_dec_conv(double *result, const char *str, int i)
+{
+	double	decimal;
+
+	decimal = 0.1;
+	i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		*result += (str[i] - '0') * decimal;
+		decimal *= 0.1;
+		i++;
+	}
+}
+
 double	ft_atof(const char *str)
 {
 	double	result;
-	double	decimal;
 	int		sign;
 	int		i;
 
@@ -58,15 +71,6 @@ double	ft_atof(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		result = result * 10.0 + (str[i++] - '0');
 	if (str[i] == '.')
-	{
-		decimal = 0.1;
-		i++;
-		while (str[i] >= '0' && str[i] <= '9')
-		{
-			result += (str[i] - '0') * decimal;
-			decimal *= 0.1;
-			i++;
-		}
-	}
+		ft_atof_dec_conv(&result, str, i);
 	return (sign * result);
-} 
+}
