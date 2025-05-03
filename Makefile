@@ -23,6 +23,11 @@ SRCS = 	main.c \
 		src/threads/deploy_threads.c \
 		src/utils/time.c \
 		src/debug/scene_print.c \
+		src/utils/ft_realloc.c \
+		src/parser/scene_parser_save_data.c \
+		src/utils/ft_strdup_join_chr.c \
+		src/parser/parse_values.c \
+		src/render/vector_utils_1.c
 
 OBJS = $(SRCS:.c=.o)
 

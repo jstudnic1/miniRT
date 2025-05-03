@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 16:17:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/05/03 16:44:48 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 22:18:30 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ int	parse_light(char *line, t_scene *scene)
 	t_light	light;
 
 	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[1] || !tokens[2] || !tokens[3])
+	if (!tokens || double_array_length(tokens) != 4)
 	{
 		if (tokens)
 			ft_free_split(tokens);
+		printf("parse light returning because of wrong number of tokens\n");
 		return (0);
 	}
 	light.position = parse_vector(tokens[1]);
 	light.brightness = ft_atof(tokens[2]);
 	light.color = parse_color(tokens[3]);
 	ft_free_split(tokens);
-	if (isnan(light.position.x) || light.color.r == -1)
+	if (isnan(light.position.x) || light.color.r == -1
+		|| light.brightness < 0.0 || light.brightness > 1.0)
 		return (0);
 	return (add_light(scene, light));
 }

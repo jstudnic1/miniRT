@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 17:47:15 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/04/13 13:26:21 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 22:26:47 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ bool		is_normalized(t_vector vec);
 
 /* RAYS */
 t_ray		create_ray(t_vector origin, t_vector direction);
+t_ray		generate_primary_ray(int x, int y, t_scene *scene);
 
 /* RENDERING */
 int			render(t_data *data);
@@ -173,6 +174,7 @@ int			parse_objects(char *identifier, char **tokens, t_scene *scene);
 int			parse_plane(char *line, t_scene *scene);
 int			parse_sphere(char *line, t_scene *scene);
 int			parse_cylinder(char *line, t_scene *scene);
+int			parse_light(char *line, t_scene *scene);
 t_vector	parse_vector(char *str);
 t_rgb		parse_color(char *str);
 int			double_array_length(char **array);

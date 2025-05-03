@@ -6,23 +6,12 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:16:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/05/03 13:39:15 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/03 22:35:47 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
 #include <math.h>
-
-double	vec_len(t_vector vector)
-{
-	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z
-			* vector.z));
-}
-
-double	dot_product(t_vector u, t_vector v)
-{
-	return (u.x * v.x + u.y * v.y + u.z * v.z);
-}
 
 t_vector	cross_product(t_vector u, t_vector v)
 {
