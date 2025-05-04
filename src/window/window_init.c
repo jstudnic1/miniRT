@@ -3,47 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   window_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-15 13:31:25 by smelicha          #+#    #+#             */
-/*   Updated: 2025-03-15 13:31:25 by smelicha         ###   ########.fr       */
+/*   Created: 2025/03/15 13:31:25 by smelicha          #+#    #+#             */
+/*   Updated: 2025/05/03 16:24:37 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
 #include <stdint.h>
 #include <stdint.h>
-
-/**
- * @brief Dummy function, just to put some distinctive pixels to the image
- * 
- * @param window 
- */
-void	test_image_fill(t_window *window)
-{
-	uint32_t	x;
-	uint32_t	y;
-	uint32_t	color;
-
-	x = 0;
-	y = 0;
-	color = 2;
-	while (y < window->height)
-	{
-		while (x < window->width)
-		{
-			mlx_put_pixel(window->image, x, y, color);
-			color += 10000;
-			if (color > (UINT32_MAX - 2000))
-				color = 2;
-			// printf("x: %i, x_max: %i, y: %i, y_max %i, color %u\n", x, window->width, y, window->height, color);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	mlx_image_to_window(window->mlx, window->image, 0, 0);
-}
 
 /**
  * @brief Updates the image based on the new window resolution
@@ -64,7 +33,8 @@ void	resize_handler(int new_x, int new_y, void *param)
 	mlx_delete_image(window->mlx, window->image);
 	window->image = NULL;
 	window->image = mlx_new_image(window->mlx, new_x, new_y);
-	test_image_fill(window);
+	mlx_image_to_window(window->mlx, window->image, 0, 0);
+	window->data->rendering = render_restart;
 }
 
 void	exit_routine(t_window *window)
@@ -73,6 +43,16 @@ void	exit_routine(t_window *window)
 	window->image = NULL;
 	mlx_close_window(window->mlx);
 	window->mlx = NULL;
+	if (window->data->scene->lights)
+		free(window->data->scene->lights);
+	if (window->data->scene->planes)
+		free(window->data->scene->planes);
+	if (window->data->scene->spheres)
+		free(window->data->scene->spheres);
+	if (window->data->scene->cylinders)
+		free(window->data->scene->cylinders);
+	if (window->data->scene)
+		free(window->data->scene);
 	return ;
 }
 
@@ -84,22 +64,13 @@ void	refresh_routine(t_window *window)
 void	loop(void *param)
 {
 	t_window	*window;
-	uint64_t	current_ts;
-	static uint64_t	refresh_ts;
 
 	window = param;
-	current_ts = ft_get_time();
-	if (refresh_ts == 0)
-	{
-		refresh_ts = current_ts + 100;
-		return ;
-	}
-	if (current_ts > refresh_ts)
-		refresh_routine(window);
+	render(window->data);
 	if (window->exit)
 		exit_routine(window);
-
-	usleep(20000);
+	if (window->data->rendering == render_finished)
+		usleep(200000);
 }
 
 /**
@@ -116,9 +87,6 @@ int	window_init(t_window *window)
 	mlx_loop_hook(window->mlx, loop, window);
 	window->image = mlx_new_image(window->mlx, window->width, window->height);
 	mlx_image_to_window(window->mlx, window->image, 0, 0);
-	test_image_fill(window);
-	printf("before mlx loop\n");
 	mlx_loop(window->mlx);
-	printf("after mlx loop\n");
 	return (0);
 }

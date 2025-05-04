@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-15 13:33:07 by smelicha          #+#    #+#             */
-/*   Updated: 2025-03-15 13:33:07 by smelicha         ###   ########.fr       */
+/*   Created: 2025/03/15 13:33:07 by smelicha          #+#    #+#             */
+/*   Updated: 2025/05/03 17:00:57 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /**
  * @brief Handles key presses...
- * 
- * @param key 
- * @param param 
+ *
+ * @param key
+ * @param param
  */
 void	key_handler(mlx_key_data_t key, void *param)
 {
@@ -29,19 +29,20 @@ void	key_handler(mlx_key_data_t key, void *param)
 		printf("esc pressed\n");
 		window->exit = true;
 	}
-	else if (key.key == MLX_KEY_R)
-	{
-		printf("telling cores to run\n");
-		change_cores_state(window->data, run);
-	}
-	else if (key.key == MLX_KEY_S)
-	{
-		printf("telling cores to stop\n");
-		change_cores_state(window->data, stop);
-	}
-	else if (key.key == MLX_KEY_F)
-	{
-		printf("telling cores to finish\n");
-		change_cores_state(window->data, finish);
-	}
 }
+
+	// else if (key.key == MLX_KEY_R)
+	// {
+	// 	printf("telling cores to run\n");
+	// 	change_cores_state(window->data, core_run);
+	// }
+	// else if (key.key == MLX_KEY_S)
+	// {
+	// 	printf("telling cores to stop\n");
+	// 	change_cores_state(window->data, core_stop);
+	// }
+	// else if (key.key == MLX_KEY_F)
+	// {
+	// 	printf("telling cores to finish\n");
+	// 	change_cores_state(window->data, core_finish);
+	// }

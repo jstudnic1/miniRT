@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deploy_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smelicha <smelicha@student.42.fr>          #+#  +:+       +#+        */
+/*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-15 19:51:28 by smelicha          #+#    #+#             */
-/*   Updated: 2025-03-15 19:51:28 by smelicha         ###   ########.fr       */
+/*   Created: 2025/03/15 19:51:28 by smelicha          #+#    #+#             */
+/*   Updated: 2025/05/03 16:45:54 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	create_mutexes(t_data *data)
 
 /**
  * @brief Dummy function that will be used as a template for the computation
- function
- TODO add internal state variable so the state mutex isn't locked during entire loop cycle
+ *        function
  * 
  * @param core 
  * @return void* 
@@ -47,13 +46,13 @@ void	*dummy_function(t_core *core)
 	while (true)
 	{
 		pthread_mutex_lock(&core->state_mtx);
-		if (core->state == run)
+		if (core->state == core_run)
 		{
 			pthread_mutex_lock(core->print);
 			printf("Hello from thread %i!\n", core->id);
 			pthread_mutex_unlock(core->print);
 		}
-		else if (core->state == finish)
+		else if (core->state == core_finish)
 		{
 			pthread_mutex_unlock(&core->state_mtx);
 			break ;
@@ -86,7 +85,7 @@ void	init_cores_data(t_data *data)
 		data->cores[i].y_start = 0;
 		data->cores[i].y_end = 0;
 		data->cores[i].print = &data->print;
-		data->cores[i].state = stop;
+		data->cores[i].state = core_stop;
 		i++;
 	}
 }
@@ -127,7 +126,8 @@ int	deploy_threads(t_data *data)
 	init_cores_data(data);
 	while (i < N_THREADS)
 	{
-		pthread_create(&data->cores[i].tid, NULL, (void *)&dummy_function, &data->cores[i]);
+		pthread_create(&data->cores[i].tid, NULL,
+			(void *)&dummy_function, &data->cores[i]);
 		i++;
 	}
 	return (0);
