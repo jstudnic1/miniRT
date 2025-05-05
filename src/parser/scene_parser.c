@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:57:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/05/03 22:21:52 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:04:44 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	parse_call_obj_parser(t_ps *ps)
 		printf("line invalidated\n");
 		ps->success = 0;
 	}
+	free(ps->line);
+	ps->line = get_next_line(ps->fd);
 }
 
 void	parse_loop(t_ps *ps)
