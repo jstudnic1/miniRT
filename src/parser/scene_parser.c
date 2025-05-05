@@ -6,7 +6,7 @@
 /*   By: smelicha <smelicha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:57:23 by jstudnic          #+#    #+#             */
-/*   Updated: 2025/05/05 20:04:44 by smelicha         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:16:36 by smelicha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ void	parse_loop(t_ps *ps)
 	while (ps->success && ps->line)
 	{
 		parse_call_obj_parser(ps);
-		free(ps->line);
-		ps->line = get_next_line(ps->fd);
 		printf("success at the end of the loop: %i\n", ps->success);
 	}
 }
