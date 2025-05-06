@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
+#include <stdbool.h>
 #include <unistd.h>
 
 int	double_array_length(char **array)
@@ -67,4 +68,24 @@ int	validate_scene(t_scene *scene)
 		return (-1);
 	}
 	return (0);
+}
+
+bool	check_filename(char *fn)
+{
+	int	i;
+
+	i = 0;
+	if (!fn)
+		return (false);
+	while (fn[i] != '\0')
+		i++;
+	if (i < 3)
+		return (false);
+	if (fn[i - 1] != 't' || fn[i - 2] != 'r' || fn[i - 3] != '.')
+	{
+		printf("Unknown file type: %s\n", fn);
+		return (false);
+	}
+	else
+		return (true);
 }

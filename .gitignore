@@ -1,5 +1,6 @@
 *.o
 minirt
+miniRT
 *.kdev4
 .kdev4/
 e2e.log

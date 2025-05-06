@@ -1,4 +1,4 @@
-NAME = minirt
+NAME = miniRT
 
 SRCS = 	main.c \
 		src/parser/scene_parser.c \

@@ -102,7 +102,7 @@ t_scene	*parse_scene(char *filename)
 {
 	t_ps	ps;
 
-	if (!filename)
+	if (!filename || !check_filename(filename))
 		return (NULL);
 	ps.scene = ft_calloc(1, sizeof(t_scene));
 	if (!ps.scene)

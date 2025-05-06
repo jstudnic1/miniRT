@@ -190,6 +190,7 @@ int			parse_light(char *line, t_scene *scene);
 t_vector	parse_vector(char *str);
 t_rgb		parse_color(char *str);
 int			double_array_length(char **array);
+bool		check_filename(char *fn);
 
 /* WINDOW */
 int			window_init(t_window *window);
