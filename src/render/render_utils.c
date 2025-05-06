@@ -33,29 +33,6 @@ void	gpr_cont(t_gpr *gpr, int x, int y, t_scene *scene)
 	gpr->ray.t_max = RAY_T_MAX;
 }
 
-/**
- * @brief Generates a primary ray from the camera through a pixel.
- *
- * Basic explanation:
- * 1. Map pixel coordinates (x, y) from image space (0 to width/height)
- *    to normalized device coordinates (NDC) space (-1 to 1, usually).
- * 2. Map NDC coordinates to screen space, considering aspect ratio and FOV.
- * 3. Transform screen space coordinates to world space relative to the camera.
- * 4. Calculate the ray direction from camera origin to the world space point.
- * 5. Normalize the direction.
- *
- * NOTE: This implementation assumes a simple setup: camera at scene->camera.
- *       position,
- *       looking towards -Z axis relative to its orientation, with +Y as up.
- *       The camera orientation vector needs to define the look-at direction.
- *       A more robust implementation uses view matrices (lookAt matrix).
- *
- * @param x Pixel x-coordinate.
- * @param y Pixel y-coordinate.
- * @param scene Contains camera information.
- * @param window Contains image width and height.
- * @return t_ray The generated primary ray.
- */
 t_ray	generate_primary_ray(int x, int y, t_scene *scene)
 {
 	t_gpr	gpr;

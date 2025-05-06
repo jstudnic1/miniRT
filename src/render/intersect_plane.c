@@ -47,26 +47,3 @@ t_collision	plane_ray_collision(t_ray ray, t_plane plane)
 	}
 	return (collision_data);
 }
-
-/**
- * @brief Calculates the intersection of a ray with a plane.
- *
- * Plane equation: (P - P0) . n = 0
- * Ray equation: R(t) = O + t*d
- * Substitute R(t) for P: (O + t*d - P0) . n = 0
- * Solve for t: t = ((P0 - O) . n) / (d . n)
- *
- * Where:
- *  P0 is a point on the plane (plane->point)
- *  n is the normal vector of the plane (plane->normal, assumed normalized)
- *  O is the ray origin (ray->origin)
- *  d is the ray direction (ray->direction, assumed normalized)
- *  . is the dot product
- *
- * @param ray The ray to intersect with the plane.
- * @param plane The plane to check for intersection.
- * @param t_max Current max t value (closest intersection found so far).
- *              Ensures we only return closer intersections.
- * @return double Distance 't' along the ray to the intersection,
- *         or RAY_T_MAX if no intersection in range [RAY_T_MIN, t_max).
- */

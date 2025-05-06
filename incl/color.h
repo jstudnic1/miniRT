@@ -23,9 +23,6 @@ typedef struct s_rgb
 	int		b; // Blue component [0-255]
 }	t_rgb;
 
-// Helper function (implementation likely in color.c or utils)
-uint32_t	rgb_to_uint32(t_rgb	color);
-
 // Color utility functions (implementations likely in color.c or utils)
 t_rgb		create_rgb(int r, int g, int b);
 int			validate_rgb(t_rgb color);
@@ -33,12 +30,5 @@ int			validate_rgb(t_rgb color);
 // Math helpers (used in color manipulation)
 int			min(int a, int b);
 int			max(int a, int b);
-
-// Optional: Define common colors
-// # define COLOR_RED     (t_rgb){255, 0, 0}
-// # define COLOR_GREEN   (t_rgb){0, 255, 0}
-// # define COLOR_BLUE    (t_rgb){0, 0, 255}
-// # define COLOR_WHITE   (t_rgb){255, 255, 255}
-// # define COLOR_BLACK   (t_rgb){0, 0, 0}
 
 #endif

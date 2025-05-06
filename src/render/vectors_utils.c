@@ -38,13 +38,6 @@ t_vector	create_vector(double x, double y, double z)
 	return (vector);
 }
 
-/**
- * @brief Multiplies each component of a vector by a scalar value.
- *
- * @param vec The vector to scale.
- * @param scalar The scalar value to multiply by.
- * @return t_vector The resulting scaled vector.
- */
 t_vector	vec_mult_scalar(t_vector vec, double scalar)
 {
 	t_vector	result;
@@ -55,12 +48,6 @@ t_vector	vec_mult_scalar(t_vector vec, double scalar)
 	return (result);
 }
 
-/**
- * @brief Checks if a vector is normalized (its length squared is close to 1).
- *
- * @param vec The vector to check.
- * @return bool True if the vector is normalized, false otherwise.
- */
 bool	is_normalized(t_vector vec)
 {
 	double	len_sq;

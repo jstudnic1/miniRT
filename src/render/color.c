@@ -30,28 +30,6 @@ int	validate_rgb(t_rgb color)
 	return (1);
 }
 
-/**
- * @brief Converts an t_rgb struct (0-255 components) to a uint32_t
- *        for MLX42 (typically RGBA, with A=255).
- *
- * @param color The t_rgb color struct.
- * @return uint32_t The color packed into a 32-bit integer.
- */
-uint32_t	rgb_to_uint32(t_rgb color)
-{
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
-	uint8_t	a;
-
-	r = (uint8_t)min(max(color.r, 0), 255);
-	g = (uint8_t)min(max(color.g, 0), 255);
-	b = (uint8_t)min(max(color.b, 0), 255);
-	a = 255;
-	return ((uint32_t)a << 24 | (uint32_t)r << 16
-		| (uint32_t)g << 8 | (uint32_t)b);
-}
-
 int	min(int a, int b)
 {
 	if (a < b)

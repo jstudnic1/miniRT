@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
-#include <math.h> // For sqrt()
+#include <math.h>
 
 static void	calculate_quadratic(t_ray ray, t_sphere sphere,
 						t_quadratic *q, t_vector *oc)

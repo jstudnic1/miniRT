@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
-#include "../../incl/render.h"
 #include <stdint.h>
-#include <math.h>
 
 #define R_SHIFT 24
 #define G_SHIFT 16

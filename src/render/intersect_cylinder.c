@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
-#include <math.h> // For sqrt()
+#include <math.h>
 
 static void	calculate_cylinder_quadratic(t_cyl_hit_params *params)
 {

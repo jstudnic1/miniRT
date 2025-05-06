@@ -17,7 +17,6 @@
 # include "objects.h"
 # include "libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-/*#include <bits/pthreadtypes.h>*/
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -29,17 +28,9 @@
 
 # define RAY_T_MIN 0.0001f
 # define RAY_T_MAX 1.0e30f
-# define N_THREADS 12
 # define EPSILON 1e-6
 
 typedef struct s_data	t_data;
-
-typedef enum e_core_state
-{
-	core_run,
-	core_stop,
-	core_finish
-}	t_e_core_state;
 
 typedef enum e_render_state
 {
@@ -48,27 +39,6 @@ typedef enum e_render_state
 	render_restart
 }	t_e_render_state;
 
-/**
- * @brief
- *
- */
-typedef struct s_core
-{
-	pthread_t		tid;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	state_mtx;
-	t_e_core_state	state;
-	int				id;
-	int				x_start;
-	int				y_start;
-	int				x_end;
-	int				y_end;
-}	t_core;
-
-/**
- * @brief
- *
- */
 typedef struct s_window
 {
 	t_data			*data;
@@ -80,17 +50,11 @@ typedef struct s_window
 	bool			res_change;
 }	t_window;
 
-/**
- * @brief
- *
- */
 typedef struct s_data
 {
 	t_window			window;
 	t_scene				*scene;
 	t_e_render_state	rendering;
-	t_core				cores[N_THREADS];
-	pthread_mutex_t		print;
 }	t_data;
 
 // Structure to hold quadratic equation results for intersections
@@ -202,6 +166,12 @@ t_ray		generate_primary_ray(int x, int y, t_scene *scene);
 /* RENDERING */
 int			render(t_data *data);
 void		check_caps(t_cyl_hit_params *params);
+t_rgb		calculate_ambient(t_ambient ambient, t_rgb surface_color);
+t_rgb		calculate_diffuse(t_light light, t_vector light_dir,
+				t_vector normal, t_rgb surface_color);
+t_rgb		calculate_lighting(t_collision hit, t_scene *scene,
+				t_vector view_dir);
+t_ray		generate_primary_ray(int x, int y, t_scene *scene);
 
 /* SCENE PARSER */
 t_scene		*parse_scene(char *filename);
@@ -227,29 +197,19 @@ void		key_handler(mlx_key_data_t key, void *param);
 t_vector	rotate_z(t_vector v, double angle_rad);
 t_vector	rotate_y(t_vector v, double angle_rad);
 
-/* THREADS */
-int			deploy_threads(t_data *data);
-void		change_cores_state(t_data *data, t_e_core_state new_state);
-
 /* INTERSECTIONS */
+t_collision	init_collision(void);
 t_collision	plane_ray_collision(t_ray inc_ray, t_plane plane);
 t_collision	sphere_ray_collision(t_ray ray, t_sphere sphere);
 t_collision	cylinder_ray_collision(t_ray ray, t_cylinder cylinder);
-
-/* UTILS */
-uint64_t	ft_get_time(void);
-int			str_comp(const char *str1, const char *str2);
+t_collision	plane_ray_collision(t_ray inc_ray, t_plane plane);
+t_vector	raypoint(t_ray ray, double t);
 
 /* DEBUG */
 void		print_scene(t_scene *scene);
 void		print_vector(const char *vec_name, t_vector *vector);
 
 /* RENDER UTILS */
-t_vector	raypoint(t_ray ray, double t);
-t_collision	init_collision(void);
 bool		solve_quadratic(t_quadratic *q);
-
-// Typedefs for function pointers if needed (example)
-// typedef double (*t_intersect_func)(const t_ray *, const void *, double);
 
 #endif
