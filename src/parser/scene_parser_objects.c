@@ -85,7 +85,7 @@ int	parse_cylinder(char *line, t_scene *scene)
 		|| cylinder.diameter <= 0 || cylinder.height <= 0)
 	{
 		fprintf(stderr, "Error: Invalid cylinder values (vector\
-			, color, non-normalized axis, or non-positive size)\n");
+			, color, or non-positive size)\n");
 		return (0);
 	}
 	return (add_cylinder(scene, cylinder));
