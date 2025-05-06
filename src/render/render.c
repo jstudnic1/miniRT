@@ -31,16 +31,6 @@ static uint32_t	rgb_to_int(t_rgb color)
 	return (val);
 }
 
-typedef struct s_gpv
-{
-	t_rgb		pixel_value;
-	t_ray		ray;
-	t_collision	closest_hit;
-	t_collision	current_hit;
-	t_vector	view_dir;
-	int			i;
-}	t_gpv;
-
 static t_rgb	gpv_cont(t_gpv *gpv, t_scene *scene)
 {
 	gpv->i = 0;

@@ -12,24 +12,6 @@
 
 #include "../../incl/minirt.h"
 
-typedef struct s_gpr
-{
-	t_ray		ray;
-	t_camera	*cam;
-	t_vector	cam_forward;
-	t_vector	world_up;
-	t_vector	cam_right;
-	t_vector	cam_up;
-	t_vector	direction;
-	double		aspect_ratio;
-	double		fov_rad;
-	double		fov_scale;
-	double		ndc_x ;
-	double		ndc_y;
-	double		screen_x;
-	double		screen_y;
-}	t_gpr;
-
 void	gpr_cont(t_gpr *gpr, int x, int y, t_scene *scene)
 {
 	gpr->cam_right = vec_normalize(gpr->cam_right);

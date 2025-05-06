@@ -134,6 +134,47 @@ typedef struct s_cyl_hit_params
 	t_vector	*oc;
 }	t_cyl_hit_params;
 
+// Structure to pass data between parser helper functions (ps = parser)
+typedef struct s_ps
+{
+	t_scene	*scene;
+	int		fd;
+	char	*line;
+	int		success;
+}	t_ps;
+
+// Structure to pass data between helpre function for getting rgb value of the
+// pixel (gpv = get pixel value)
+typedef struct s_gpv
+{
+	t_rgb		pixel_value;
+	t_ray		ray;
+	t_collision	closest_hit;
+	t_collision	current_hit;
+	t_vector	view_dir;
+	int			i;
+}	t_gpv;
+
+// Structure to pass data between helper function for generating the primary
+// ray (gpr = generate primary ray)
+typedef struct s_gpr
+{
+	t_ray		ray;
+	t_camera	*cam;
+	t_vector	cam_forward;
+	t_vector	world_up;
+	t_vector	cam_right;
+	t_vector	cam_up;
+	t_vector	direction;
+	double		aspect_ratio;
+	double		fov_rad;
+	double		fov_scale;
+	double		ndc_x ;
+	double		ndc_y;
+	double		screen_x;
+	double		screen_y;
+}	t_gpr;
+
 /* VECTOR UTILS*/
 double		vec_len(t_vector vector);
 double		dot_product(t_vector u, t_vector v);
@@ -160,6 +201,7 @@ t_ray		generate_primary_ray(int x, int y, t_scene *scene);
 
 /* RENDERING */
 int			render(t_data *data);
+void		check_caps(t_cyl_hit_params *params);
 
 /* SCENE PARSER */
 t_scene		*parse_scene(char *filename);

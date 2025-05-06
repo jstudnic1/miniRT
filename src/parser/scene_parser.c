@@ -56,14 +56,6 @@ static int	parse_camera(char *line, t_scene *scene)
 	return (1);
 }
 
-typedef struct s_ps
-{
-	t_scene	*scene;
-	int		fd;
-	char	*line;
-	int		success;
-}	t_ps;
-
 void	parse_call_obj_parser(t_ps *ps)
 {
 	if (ps->line[0] == '#' || ps->line[0] == '\0' || ps->line[0] == '\n')

@@ -27,7 +27,8 @@ SRCS = 	main.c \
 		src/parser/scene_parser_save_data.c \
 		src/utils/ft_strdup_join_chr.c \
 		src/parser/parse_values.c \
-		src/render/vector_utils_1.c
+		src/render/vector_utils_1.c \
+		src/render/intersect_cylinder_caps.c
 
 OBJS = $(SRCS:.c=.o)
 
