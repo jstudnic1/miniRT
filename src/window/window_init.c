@@ -41,7 +41,6 @@ void	exit_routine(t_window *window)
 {
 	mlx_delete_image(window->mlx, window->image);
 	window->image = NULL;
-	mlx_close_window(window->mlx);
 	window->mlx = NULL;
 	if (window->data->scene->lights)
 		free(window->data->scene->lights);
@@ -68,7 +67,7 @@ void	loop(void *param)
 	window = param;
 	render(window->data);
 	if (window->exit)
-		exit_routine(window);
+		mlx_close_window(window->mlx);
 	if (window->data->rendering == render_finished)
 		usleep(200000);
 }
@@ -88,5 +87,6 @@ int	window_init(t_window *window)
 	window->image = mlx_new_image(window->mlx, window->width, window->height);
 	mlx_image_to_window(window->mlx, window->image, 0, 0);
 	mlx_loop(window->mlx);
+	exit_routine(window);
 	return (0);
 }
