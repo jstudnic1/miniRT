@@ -20,14 +20,14 @@ SRCS = 	main.c \
        	src/utils/get_next_line.c \
 		src/window/window_init.c \
 		src/window/event_handlers.c \
-		src/threads/deploy_threads.c \
-		src/utils/time.c \
 		src/debug/scene_print.c \
 		src/utils/ft_realloc.c \
 		src/parser/scene_parser_save_data.c \
 		src/utils/ft_strdup_join_chr.c \
 		src/parser/parse_values.c \
-		src/render/vector_utils_1.c
+		src/render/vector_utils_1.c \
+		src/render/intersect_cylinder_caps.c \
+		src/window/camera_rotation.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -35,7 +35,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 MLX42 = ./MLX42/build/libmlx42.a
 MLX42_BUILD_DIR = ./MLX42/build
-CINCL = -Iinclude -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -gdwarf-4 -fsanitize=address -static-libsan
+CINCL = -Iinclude -L/opt/homebrew/lib -ldl -lglfw -lm -gdwarf-4 -fsanitize=address -static-libsan
 
 all: $(NAME)
 

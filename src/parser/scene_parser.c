@@ -56,14 +56,6 @@ static int	parse_camera(char *line, t_scene *scene)
 	return (1);
 }
 
-typedef struct s_ps
-{
-	t_scene	*scene;
-	int		fd;
-	char	*line;
-	int		success;
-}	t_ps;
-
 void	parse_call_obj_parser(t_ps *ps)
 {
 	if (ps->line[0] == '#' || ps->line[0] == '\0' || ps->line[0] == '\n')
@@ -102,30 +94,30 @@ void	parse_loop(t_ps *ps)
 		parse_call_obj_parser(ps);
 		printf("success at the end of the loop: %i\n", ps->success);
 	}
+	if (ps->success == 0 && ps->line)
+		free(ps->line);
 }
 
 t_scene	*parse_scene(char *filename)
 {
 	t_ps	ps;
 
-	printf("scene file path: %s\n", filename);
 	if (!filename)
 		return (NULL);
 	ps.scene = ft_calloc(1, sizeof(t_scene));
 	if (!ps.scene)
 		return (NULL);
 	ps.fd = open(filename, O_RDONLY);
-	printf("scene file fd: %i\n", ps.fd);
 	if (ps.fd < 0)
 	{
 		free_scene(ps.scene);
+		free(ps.scene);
 		return (NULL);
 	}
 	parse_loop(&ps);
 	close(ps.fd);
 	if (!ps.success)
 	{
-		printf("scene set to NULL\n");
 		free_scene(ps.scene);
 		free(ps.scene);
 		ps.scene = NULL;

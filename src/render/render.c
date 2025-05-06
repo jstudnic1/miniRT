@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../incl/minirt.h"
-#include "../../incl/render.h"
 #include <stdint.h>
-#include <math.h>
 
 #define R_SHIFT 24
 #define G_SHIFT 16
@@ -30,16 +28,6 @@ static uint32_t	rgb_to_int(t_rgb color)
 	val |= 255;
 	return (val);
 }
-
-typedef struct s_gpv
-{
-	t_rgb		pixel_value;
-	t_ray		ray;
-	t_collision	closest_hit;
-	t_collision	current_hit;
-	t_vector	view_dir;
-	int			i;
-}	t_gpv;
 
 static t_rgb	gpv_cont(t_gpv *gpv, t_scene *scene)
 {

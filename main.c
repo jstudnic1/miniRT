@@ -16,11 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define EPSILON if not already defined globally (e.g., in minirt.h)
-// #ifndef EPSILON
-// # define EPSILON 1e-6
-// #endif
-
 /**
  * @brief Calls parser and validates input file
  *
@@ -79,7 +74,6 @@ int	main(int argc, char **argv)
 	data_init(&data);
 	if (scene_init(&data, argv[1]) < 0)
 		return (-1);
-	// deploy_threads(&data);
 	window_init(&data.window);
 	if (data.window.image)
 		mlx_delete_image(data.window.mlx, data.window.image);

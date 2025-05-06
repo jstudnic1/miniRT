@@ -49,7 +49,6 @@ void	init_scene(t_scene *scene)
 	scene->camera.fov = -1.0;
 }
 
-// Placeholder for free_scene - ensure it frees allocated arrays
 void	free_scene(t_scene *scene)
 {
 	if (!scene)
