@@ -224,6 +224,8 @@ int			double_array_length(char **array);
 /* WINDOW */
 int			window_init(t_window *window);
 void		key_handler(mlx_key_data_t key, void *param);
+t_vector	rotate_z(t_vector v, double angle_rad);
+t_vector	rotate_y(t_vector v, double angle_rad);
 
 /* THREADS */
 int			deploy_threads(t_data *data);
