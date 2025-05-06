@@ -35,7 +35,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 MLX42 = ./MLX42/build/libmlx42.a
 MLX42_BUILD_DIR = ./MLX42/build
-CINCL = -Iinclude -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -gdwarf-4 -fsanitize=address
+CINCL = -Iinclude -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -gdwarf-4 -fsanitize=address -static-libsan
 
 all: $(NAME)
 

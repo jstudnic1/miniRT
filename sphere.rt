@@ -4,10 +4,10 @@
 A 0.2 255,255,255
 
 # Camera: at origin, looking down -Z axis, 70 FOV
-C 0,0,0 0,0,-1 70
+C 0,0,0 1,0,0 70
 
 # Light source: point light, off-axis, moderate brightness
 L -5,5,-2 0.7 255,255,255
 
 # Sphere: center at (0, 0, -5), radius 2, color red
-sp 0,0,-15 8 255,0,0
+sp 10,0,0 8 255,0,0
